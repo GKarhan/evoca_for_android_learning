@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
     tools:context="com.example.evoca.evocaforandroidlearning.MainActivity">
 
     <ImageView
-        android:layout_width="193dp"
-        android:layout_height="180dp"
-        android:layout_centerInParent="true"
-        android:src="@drawable/logo" />
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center"
+        android:src="@drawable/logo"
+        android:layout_width="80dp"
+        android:layout_height="67dp" />
 
-</RelativeLayout>
+    <ExpandableListView
+        android:id="@+id/elv_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:indicatorLeft="250dp"
+        android:indicatorRight="300dp" />
+
+
+</LinearLayout>
