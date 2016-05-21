@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.vacho.myapplication999.LoginActivity">
+
+    <ImageView
+        android:layout_gravity="center"
+        android:layout_marginTop="39dp"
+        android:src="@drawable/logo"
+        android:layout_width="88dp"
+        android:layout_height="75dp" />
+    <TextView
+        android:layout_marginLeft="33dp"
+        android:layout_marginTop="50dp"
+        android:text="Login to your acount"
+        android:textSize="18dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginLeft="33dp"
+        android:layout_marginRight="33dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#367400" />
+    <TextView
+        android:layout_marginLeft="33dp"
+        android:text="Username:"
+        android:layout_marginTop="10dp"
+        android:textSize="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/et_login_username"
+        android:layout_marginLeft="33dp"
+        android:layout_marginRight="33dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/login_username"
+        android:layout_width="match_parent"
+        android:layout_height="33dp" />
+    <TextView
+        android:layout_marginLeft="33dp"
+        android:text="Password:"
+        android:layout_marginTop="10dp"
+        android:textSize="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/et_login_password"
+        android:layout_marginLeft="33dp"
+        android:layout_marginRight="33dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/login_username"
+        android:layout_width="match_parent"
+        android:layout_height="33dp" />
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_marginLeft="33dp"
+        android:layout_marginRight="33dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/login_login_button"
+        android:text="Login"
+        android:textColor="#F4F4F4"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+    <FrameLayout
+        android:background="#C3C3C3"
+        android:layout_marginLeft="33dp"
+        android:layout_marginRight="33dp"
+        android:layout_marginTop="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="47dp">
+    <Button
+        android:id="@+id/btn_login_with_facebook"
+        android:drawableRight="@drawable/faace"
+        android:layout_gravity="center"
+        android:text="Login with facebook"
+        android:textColor="#367400"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/login_share_button"
+        android:layout_width="match_parent"
+        android:layout_height="35dp" />
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/btn_login_sign_up"
+        android:layout_marginLeft="33dp"
+        android:layout_marginRight="33dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/login_login_button"
+        android:text="SignUp"
+        android:textColor="#F4F4F4"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+
+</LinearLayout>
