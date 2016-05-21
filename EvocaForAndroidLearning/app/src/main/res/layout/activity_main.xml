@@ -1,25 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:gravity="center_horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.evoca.evocaforandroidlearning.MainActivity">
 
     <ImageView
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="40dp"
-        android:layout_gravity="center"
+        android:layout_marginTop="140dp"
         android:src="@drawable/logo"
-        android:layout_width="80dp"
-        android:layout_height="67dp" />
-
-    <ExpandableListView
-        android:id="@+id/elv_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:indicatorLeft="250dp"
-        android:indicatorRight="300dp" />
-
-
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:text="@string/app_sub_name"
+        android:textSize="20dp"
+        android:textColor="#367400"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginTop="70dp"
+        android:textSize="38dp"
+        android:text="@string/android_tutorial"
+        android:textColor="#367400"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </LinearLayout>
