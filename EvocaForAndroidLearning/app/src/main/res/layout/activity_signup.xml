@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.evoca.evocaforandroidlearning.SignupActivity">
+
+    <ImageView
+        android:layout_width="88dp"
+        android:layout_height="75dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="39dp"
+        android:src="@drawable/logo" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="33dp"
+        android:layout_marginTop="50dp"
+        android:text="Fill the Form"
+        android:textSize="18dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="33dp"
+        android:layout_marginRight="33dp"
+        android:layout_marginTop="10dp"
+        android:background="#367400" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="33dp"
+        android:layout_marginTop="10dp"
+        android:text="Name*:"
+        android:textSize="16dp" />
+
+    <EditText
+        android:id="@+id/et_signup_name"
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:layout_marginLeft="33dp"
+        android:layout_marginRight="33dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/login_username" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="33dp"
+        android:layout_marginTop="10dp"
+        android:text="Surname*:"
+        android:textSize="16dp" />
+
+    <EditText
+        android:id="@+id/et_signup_surname"
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:layout_marginLeft="33dp"
+        android:layout_marginRight="33dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/login_username" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="33dp"
+        android:layout_marginTop="10dp"
+        android:text="Email*:"
+        android:textSize="16dp" />
+
+    <EditText
+        android:id="@+id/et_signup_email"
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:layout_marginLeft="33dp"
+        android:layout_marginRight="33dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/login_username" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="33dp"
+        android:layout_marginTop="10dp"
+        android:text="Password*:"
+        android:textSize="16dp" />
+
+    <EditText
+        android:id="@+id/et_signup_password"
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:layout_marginLeft="33dp"
+        android:layout_marginRight="33dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/login_username" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="33dp"
+        android:layout_marginTop="10dp"
+        android:text="Confirm password*:"
+        android:textSize="16dp" />
+
+    <EditText
+        android:id="@+id/et_signup_confirm_password"
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:layout_marginLeft="33dp"
+        android:layout_marginRight="33dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/login_username" />
+
+    <Button
+        android:id="@+id/btn_submit"
+        android:layout_marginLeft="33dp"
+        android:layout_marginRight="33dp"
+        android:layout_marginTop="33dp"
+        android:background="@drawable/login_login_button"
+        android:text="Submit"
+        android:textSize="18pt"
+        android:textColor="#F4F4F4"
+        android:layout_width="match_parent"
+        android:layout_height="41dp" />
+
+
+
+</LinearLayout>
