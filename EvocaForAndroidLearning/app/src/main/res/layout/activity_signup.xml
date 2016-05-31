@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.evoca.evocaforandroidlearning.SignupActivity">
+    tools:context=".activity.SignupActivity">
 
     <ImageView
         android:layout_width="88dp"
@@ -14,24 +14,31 @@
         android:src="@drawable/logo" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_marginLeft="33dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:text="Fill the Form"
         android:textSize="18dp" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_weight="1"
         android:layout_marginLeft="33dp"
         android:layout_marginRight="33dp"
         android:layout_marginTop="10dp"
         android:background="#367400" />
+    </LinearLayout>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_marginLeft="33dp"
         android:layout_marginTop="10dp"
         android:text="Name*:"
@@ -40,15 +47,16 @@
     <EditText
         android:id="@+id/et_signup_name"
         android:layout_width="match_parent"
-        android:layout_height="33dp"
+        android:layout_height="0dp"
+        android:layout_weight="1.2"
         android:layout_marginLeft="33dp"
         android:layout_marginRight="33dp"
-        android:layout_marginTop="10dp"
         android:background="@drawable/login_username" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_marginLeft="33dp"
         android:layout_marginTop="10dp"
         android:text="Surname*:"
@@ -57,15 +65,18 @@
     <EditText
         android:id="@+id/et_signup_surname"
         android:layout_width="match_parent"
-        android:layout_height="33dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="0dp"
+        android:layout_weight="1.2"
         android:layout_marginLeft="33dp"
         android:layout_marginRight="33dp"
-        android:layout_marginTop="10dp"
+
         android:background="@drawable/login_username" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_marginLeft="33dp"
         android:layout_marginTop="10dp"
         android:text="Email*:"
@@ -74,15 +85,16 @@
     <EditText
         android:id="@+id/et_signup_email"
         android:layout_width="match_parent"
-        android:layout_height="33dp"
+        android:layout_height="0dp"
+        android:layout_weight="1.2"
         android:layout_marginLeft="33dp"
         android:layout_marginRight="33dp"
-        android:layout_marginTop="10dp"
         android:background="@drawable/login_username" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_marginLeft="33dp"
         android:layout_marginTop="10dp"
         android:text="Password*:"
@@ -91,15 +103,17 @@
     <EditText
         android:id="@+id/et_signup_password"
         android:layout_width="match_parent"
-        android:layout_height="33dp"
+        android:layout_height="0dp"
+        android:layout_weight="1.2"
         android:layout_marginLeft="33dp"
         android:layout_marginRight="33dp"
-        android:layout_marginTop="10dp"
+
         android:background="@drawable/login_username" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_marginLeft="33dp"
         android:layout_marginTop="10dp"
         android:text="Confirm password*:"
@@ -108,23 +122,31 @@
     <EditText
         android:id="@+id/et_signup_confirm_password"
         android:layout_width="match_parent"
-        android:layout_height="33dp"
+        android:layout_height="0dp"
+        android:layout_weight="1.2"
         android:layout_marginLeft="33dp"
         android:layout_marginRight="33dp"
-        android:layout_marginTop="10dp"
         android:background="@drawable/login_username" />
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <Button
-        android:id="@+id/btn_submit"
+        android:id="@+id/btn_sign_up"
         android:layout_marginLeft="33dp"
         android:layout_marginRight="33dp"
         android:layout_marginTop="33dp"
+        android:layout_marginBottom="33dp"
         android:background="@drawable/login_login_button"
         android:text="Submit"
-        android:textSize="18pt"
+        android:textSize="20dp"
+        android:textAllCaps="false"
         android:textColor="#F4F4F4"
         android:layout_width="match_parent"
-        android:layout_height="41dp" />
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+    </LinearLayout>
 
 
 

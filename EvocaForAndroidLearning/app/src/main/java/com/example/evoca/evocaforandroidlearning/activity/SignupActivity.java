@@ -1,7 +1,9 @@
-package com.example.evoca.evocaforandroidlearning;
+package com.example.evoca.evocaforandroidlearning.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.evoca.evocaforandroidlearning.R;
 
 public class SignupActivity extends AppCompatActivity {
 

@@ -20,7 +20,4 @@
             android:textStyle="bold"
             android:textSize="18sp"/>
     </LinearLayout>
-
-
-
 </LinearLayout>

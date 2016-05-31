@@ -5,28 +5,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.evoca.evocaforandroidlearning.MainActivity">
+    tools:context=".activity.MainActivity">
 
-    <ImageView
-        android:adjustViewBounds="true"
-        android:id="@+id/animationView"
-        android:layout_marginTop="140dp"
-        android:src="@drawable/logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <!--<ImageView-->
+        <!--android:adjustViewBounds="true"-->
+        <!--android:id="@+id/animationView"-->
+        <!--android:layout_marginTop="140dp"-->
+        <!--android:src="@drawable/logo"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
 
-    <TextView
-        android:text="@string/app_sub_name"
-        android:textSize="20dp"
-        android:textColor="#367400"
-        android:layout_marginTop="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:layout_marginTop="70dp"
-        android:textSize="38dp"
-        android:text="@string/android_tutorial"
-        android:textColor="#367400"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <!--<TextView-->
+        <!--android:text="@string/app_sub_name"-->
+        <!--android:textSize="20dp"-->
+        <!--android:textColor="#367400"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
+    <!--<TextView-->
+        <!--android:layout_marginTop="70dp"-->
+        <!--android:textSize="38dp"-->
+        <!--android:text="@string/android_tutorial"-->
+        <!--android:textColor="#367400"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/container">
+    </FrameLayout>
 </LinearLayout>
