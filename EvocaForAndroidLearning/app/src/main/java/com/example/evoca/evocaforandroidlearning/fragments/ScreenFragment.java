@@ -36,7 +36,6 @@ public class ScreenFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
         View rootView  = inflater.inflate(R.layout.fragment_screen, container, false);
         ImageView img = (ImageView)rootView.findViewById(R.id.animationView);

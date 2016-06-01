@@ -19,28 +19,31 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         findView();
+        listener();
 
 
+    }
+
+    void findView() {
+        loginButton = (Button) findViewById(R.id.btn_login);
+        signUpButton = (Button) findViewById(R.id.btn_login_sign_up);
+    }
+
+    void listener() {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this,ListActivity.class);
+                Intent intent = new Intent(LoginActivity.this, ListActivity.class);
                 startActivity(intent);
             }
         });
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this,SignupActivity.class);
+                Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
                 startActivity(intent);
             }
         });
-
-    }
-
-    void findView(){
-        loginButton = (Button) findViewById(R.id.btn_login);
-        signUpButton = (Button) findViewById(R.id.btn_login_sign_up);
     }
 
 }
