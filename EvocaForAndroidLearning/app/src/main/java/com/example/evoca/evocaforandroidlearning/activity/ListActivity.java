@@ -1,5 +1,6 @@
 package com.example.evoca.evocaforandroidlearning.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -21,7 +22,7 @@ public class ListActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
-        ExpandableListView listView = (ExpandableListView)findViewById(R.id.elv_list);
+        final ExpandableListView listView = (ExpandableListView)findViewById(R.id.elv_list);
 
         ArrayList<ArrayList<String>> groups = new ArrayList<ArrayList<String>>();
         ArrayList<String> children1 = new ArrayList<String>();
@@ -44,25 +45,29 @@ public class ListActivity extends AppCompatActivity  {
         groups.add(children3);
         //Создаем адаптер и передаем context и список с данными
 //
-        listView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-               transaction = getSupportFragmentManager().beginTransaction();
-                if(groupPosition == 0&&childPosition==0  ) {
-                    transaction.add(R.id.container, LessonFragment.newInstance()).commit();
-                    Toast.makeText(ListActivity.this, "position_1", Toast.LENGTH_SHORT).show();
 
-                }
-                if(groupPosition == 0&&childPosition==1  ) {
-                    //transaction.replace(R.id.container, LessonFragment.newInstance()).commit();
-                    Toast.makeText(ListActivity.this, "position2_2", Toast.LENGTH_SHORT).show();
-                }
+       if (listView != null) {
+           listView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+               @Override
+               public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 
-                return false;
-            }
-        });
+                   transaction = getSupportFragmentManager().beginTransaction();
+                   if (groupPosition == 0 && childPosition == 0) {
+                       listView.removeAllViewsInLayout();
+                       transaction.replace(R.id.listframe, LessonFragment.newInstance());
+                       transaction.commit();
+                       Toast.makeText(ListActivity.this, "position_1", Toast.LENGTH_SHORT).show();
+                   }
+                   if (groupPosition == 0 && childPosition == 1) {
+                       //transaction.replace(R.id.container, LessonFragment.newInstance()).commit();
+                       Toast.makeText(ListActivity.this, "position2_2", Toast.LENGTH_SHORT).show();
+                   }
 
+                   return false;
+               }
+           });
 
+       }
         CustomAdapter adapter = new CustomAdapter(getApplicationContext(), groups);
         listView.setAdapter(adapter);
     }

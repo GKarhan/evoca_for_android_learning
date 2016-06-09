@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
 import com.example.evoca.evocaforandroidlearning.R;
 import com.example.evoca.evocaforandroidlearning.fragments.LessonFragment;
@@ -19,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
 //        ImageView img = (ImageView)findViewById(R.id.animationView);
 //        img.setImageResource(R.drawable.logo);
 //        Animation animation = AnimationUtils.loadAnimation(this, R.anim.common_animation);
+//        animation.setDuration(7000);
+//
 //        img.startAnimation(animation);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container, ScreenFragment.newInstance()).commit();

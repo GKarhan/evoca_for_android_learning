@@ -1,15 +1,20 @@
 package com.example.evoca.evocaforandroidlearning.fragments;
 
+import android.app.ListFragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.evoca.evocaforandroidlearning.R;
 
 
 public class LessonFragment extends Fragment {
+
+    private Button exerciseButton;
 
     public LessonFragment() {
         // Required empty public constructor
@@ -33,7 +38,20 @@ public class LessonFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_lesson, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_lesson, container, false);
+
+        exerciseButton = (Button) rootView.findViewById(R.id.btn_exercise);
+
+        exerciseButton.setOnClickListener(new View.OnClickListener() {
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            @Override
+            public void onClick(View v) {
+                transaction.replace(R.id.listframe,ExerciseFragment.newInstance()).commit();
+            }
+        });
+
+
+        return rootView;
     }
 
 }
