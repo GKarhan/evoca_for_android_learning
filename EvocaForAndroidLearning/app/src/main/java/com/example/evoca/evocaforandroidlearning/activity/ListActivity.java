@@ -62,11 +62,9 @@ public class ListActivity extends AppCompatActivity  {
                        //transaction.replace(R.id.container, LessonFragment.newInstance()).commit();
                        Toast.makeText(ListActivity.this, "position2_2", Toast.LENGTH_SHORT).show();
                    }
-
                    return false;
                }
            });
-
        }
         CustomAdapter adapter = new CustomAdapter(getApplicationContext(), groups);
         listView.setAdapter(adapter);

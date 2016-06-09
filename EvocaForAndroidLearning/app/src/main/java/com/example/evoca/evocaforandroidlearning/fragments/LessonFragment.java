@@ -1,6 +1,5 @@
 package com.example.evoca.evocaforandroidlearning.fragments;
 
-import android.app.ListFragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -40,7 +39,7 @@ public class LessonFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_lesson, container, false);
 
-        exerciseButton = (Button) rootView.findViewById(R.id.btn_exercise);
+        exerciseButton = (Button) rootView.findViewById(R.id.btn_chack);
 
         exerciseButton.setOnClickListener(new View.OnClickListener() {
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
