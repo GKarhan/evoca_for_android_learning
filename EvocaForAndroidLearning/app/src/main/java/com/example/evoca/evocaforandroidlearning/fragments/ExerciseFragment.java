@@ -19,7 +19,7 @@ public class ExerciseFragment extends Fragment {
         // Required empty public constructor
     }
 
-
+//
     public static ExerciseFragment newInstance() {
         ExerciseFragment fragment = new ExerciseFragment();
         Bundle args = new Bundle();
