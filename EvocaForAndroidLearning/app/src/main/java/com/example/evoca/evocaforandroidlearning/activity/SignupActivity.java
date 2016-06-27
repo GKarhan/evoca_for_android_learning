@@ -1,5 +1,8 @@
 package com.example.evoca.evocaforandroidlearning.activity;
 
+/**
+ * Created by Vacho on 27.06.2016.
+ */
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +14,7 @@ import android.widget.ProgressBar;
 import com.example.evoca.evocaforandroidlearning.Model.Api;
 import com.example.evoca.evocaforandroidlearning.Model.ServerResponse;
 import com.example.evoca.evocaforandroidlearning.R;
+import com.example.evoca.evocaforandroidlearning.dialogs.CustomDialog;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -71,9 +75,13 @@ public class SignUpActivity extends AppCompatActivity {
                 client.postRegistrationData(email, password, firstName, lastName, new Callback<ServerResponse>() {
                     @Override
                     public void success(ServerResponse serverResponse, Response response) {
-                            progressBar.setVisibility(View.GONE);
-                            Intent intent = new Intent(SignUpActivity.this, ListActivity.class);
-                            startActivity(intent);
+                        progressBar.setVisibility(View.GONE);
+//                        Intent intent = new Intent(SignUpActivity.this, ListActivity.class);
+//                        startActivity(intent);
+                        if (serverResponse.getStatus()){
+                            CustomDialog custom = new CustomDialog();
+                            custom.show(getSupportFragmentManager(),null);
+                        }
 
                     }
 
@@ -123,3 +131,4 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 }
+

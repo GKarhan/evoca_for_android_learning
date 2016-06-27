@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.evoca.evocaforandroidlearning.Model.Api;
 import com.example.evoca.evocaforandroidlearning.Model.ServerResponse;
@@ -65,10 +66,17 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void success(ServerResponse serverResponse, Response response) {
                         progressBar.setVisibility(View.GONE);
-                        if (response.getBody() != null) {
-                            Intent intent = new Intent(LoginActivity.this, ListActivity.class);
+//                        if (response.getBody() != null) {
+//                            Intent intent = new Intent(LoginActivity.this, ListActivity.class);
+//                            startActivity(intent);
+//                        }
+                       if (!serverResponse.getStatus()){
+                           Toast.makeText(LoginActivity.this, "false"+serverResponse.getStatus(), Toast.LENGTH_SHORT).show();
+                       }else {
+                           Intent intent = new Intent(LoginActivity.this, ListActivity.class);
                             startActivity(intent);
-                        }
+                           Toast.makeText(LoginActivity.this, "true" +serverResponse.getStatus(), Toast.LENGTH_SHORT).show();
+                       }
                     }
 
                     @Override

@@ -8,7 +8,13 @@ public class ServerResponse {
     String last_name;
     String email;
     String password;
+    Boolean status;
 
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {this.status = status;}
 
     public String getFirst_name() {
         return first_name;
