@@ -1,7 +1,7 @@
 package com.example.evoca.evocaforandroidlearning.activity;
 
 /**
- * Created by Vacho on 27.06.2016.
+ * Created by Evoca-PC on 6/28/2016.
  */
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -10,11 +10,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.evoca.evocaforandroidlearning.Model.Api;
 import com.example.evoca.evocaforandroidlearning.Model.ServerResponse;
 import com.example.evoca.evocaforandroidlearning.R;
 import com.example.evoca.evocaforandroidlearning.dialogs.CustomDialog;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -62,73 +66,110 @@ public class SignUpActivity extends AppCompatActivity {
                 String password = editTextSignUpPass.getText().toString();
                 String confirmPassword = editTextSignUpConfirmPass.getText().toString();
 
-                validation();
-                emailValidation();
+//                validation();
+//                emailValidation();
 
-                RestAdapter restAdapter = new RestAdapter.Builder()
-                        .setLogLevel(RestAdapter.LogLevel.FULL)
-                        .setEndpoint("http://api.evocalab.com/evoca/test")
-                        .build();
+                if (validation() && emailValidation() && confirmValidation()) {
+                    RestAdapter restAdapter = new RestAdapter.Builder()
+                            .setLogLevel(RestAdapter.LogLevel.FULL)
+                            .setEndpoint("http://api.evocalab.com/evoca/test")
+                            .build();
 
-                Api client = restAdapter.create(Api.class);
+                    Api client = restAdapter.create(Api.class);
 
-                client.postRegistrationData(email, password, firstName, lastName, new Callback<ServerResponse>() {
-                    @Override
-                    public void success(ServerResponse serverResponse, Response response) {
-                        progressBar.setVisibility(View.GONE);
-//                        Intent intent = new Intent(SignUpActivity.this, ListActivity.class);
-//                        startActivity(intent);
-                        if (serverResponse.getStatus()){
-                            CustomDialog custom = new CustomDialog();
-                            custom.show(getSupportFragmentManager(),null);
+                    client.postRegistrationData(email, password, firstName, lastName, new Callback<ServerResponse>() {
+                        @Override
+                        public void success(ServerResponse serverResponse, Response response) {
+                            progressBar.setVisibility(View.GONE);
+                            if (serverResponse.getStatus()) {
+                                CustomDialog custom = new CustomDialog();
+                                custom.show(getSupportFragmentManager(), null);
+                            } else {
+                                editTextSignUpEmail.setError("This mail already exists ");
+                                editTextSignUpEmail.requestFocus();
+                            }
                         }
 
-                    }
+                        @Override
+                        public void failure(RetrofitError error) {
+                            progressBar.setVisibility(View.GONE);
 
-                    @Override
-                    public void failure(RetrofitError error) {
-                        progressBar.setVisibility(View.GONE);
-                    }
-                });
+                        }
+                    });
+                }
 
             }
         });
     }
 
-    void validation() {
+
+    boolean validation() {
 
         if (editTextFistName.getText().toString().length() == 0) {
             progressBar.setVisibility(View.GONE);
             editTextFistName.setError("Fill out the required field");
             editTextFistName.requestFocus();
+            return false;
 
         } else if (editTextLastName.getText().toString().length() == 0) {
             progressBar.setVisibility(View.GONE);
             editTextLastName.setError("Fill out the required field");
             editTextLastName.requestFocus();
+            return false;
 
         }else if (editTextSignUpEmail.getText().toString().length() == 0) {
             progressBar.setVisibility(View.GONE);
             editTextSignUpEmail.setError("Fill out the required field");
             editTextSignUpEmail.requestFocus();
+            return false;
         }
         else if (editTextSignUpPass.getText().toString().length() == 0) {
             progressBar.setVisibility(View.GONE);
             editTextSignUpPass.setError("Fill out the required field");
             editTextSignUpPass.requestFocus();
+            return false;
         }
         else if (editTextSignUpConfirmPass.getText().toString().length() == 0) {
             progressBar.setVisibility(View.GONE);
             editTextSignUpConfirmPass.setError("Fill out the required field");
             editTextSignUpConfirmPass.requestFocus();
+            return false;
         }
+//        else if()   {
+//            progressBar.setVisibility(View.GONE);
+//            editTextSignUpConfirmPass.setError("confirmation failed");
+//            editTextSignUpConfirmPass.requestFocus();
+//            return false;
+//        }
+        return true;
     }
-    void emailValidation() {
-        if (!editTextSignUpEmail.getText().toString().contains("@")) {
+
+    boolean emailValidation() {
+        String regex = "^(.+)@(.+)\\.(.+)$";
+        String email = editTextSignUpEmail.getText().toString();
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+        if (!matcher.matches()) {
             progressBar.setVisibility(View.GONE);
             editTextSignUpEmail.setError("incorrect email");
             editTextSignUpEmail.requestFocus();
+            return false;
         }
+        return true;
     }
-}
 
+    boolean confirmValidation(){
+        String pass = editTextSignUpPass.getText().toString();
+        String passConfirm = editTextSignUpConfirmPass.getText().toString();
+        if (!pass.equals(passConfirm)){
+            progressBar.setVisibility(View.GONE);
+            editTextSignUpConfirmPass.setError("chi ham@nknum");
+            editTextSignUpConfirmPass.requestFocus();
+            return false;
+        }
+        return true;
+    }
+
+
+
+}

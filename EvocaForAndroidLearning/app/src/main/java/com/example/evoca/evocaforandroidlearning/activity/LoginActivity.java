@@ -13,12 +13,15 @@ import com.example.evoca.evocaforandroidlearning.Model.Api;
 import com.example.evoca.evocaforandroidlearning.Model.ServerResponse;
 import com.example.evoca.evocaforandroidlearning.R;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity  {
 
 
     private Button loginButton;
@@ -52,38 +55,36 @@ public class LoginActivity extends AppCompatActivity {
                 String email = editTextEmail.getText().toString();
                 String password = editTextPassword.getText().toString();
 
-                validation();
-                emailValidation();
+                  validation();
+                  emailValidation();
+                if (validation() && emailValidation() ) {
+                    RestAdapter restAdapter = new RestAdapter.Builder()
+                            .setLogLevel(RestAdapter.LogLevel.FULL)
+                            .setEndpoint("http://api.evocalab.com/evoca/test")
+                            .build();
 
-                RestAdapter restAdapter = new RestAdapter.Builder()
-                        .setLogLevel(RestAdapter.LogLevel.FULL)
-                        .setEndpoint("http://api.evocalab.com/evoca/test")
-                        .build();
+                    Api client = restAdapter.create(Api.class);
 
-                Api client = restAdapter.create(Api.class);
+                    client.postLoginData(email, password, new Callback<ServerResponse>() {
+                        @Override
+                        public void success(ServerResponse serverResponse, Response response) {
+                            progressBar.setVisibility(View.GONE);
 
-                client.postLoginData(email, password, new Callback<ServerResponse>() {
-                    @Override
-                    public void success(ServerResponse serverResponse, Response response) {
-                        progressBar.setVisibility(View.GONE);
-//                        if (response.getBody() != null) {
-//                            Intent intent = new Intent(LoginActivity.this, ListActivity.class);
-//                            startActivity(intent);
-//                        }
-                       if (!serverResponse.getStatus()){
-                           Toast.makeText(LoginActivity.this, "false"+serverResponse.getStatus(), Toast.LENGTH_SHORT).show();
-                       }else {
-                           Intent intent = new Intent(LoginActivity.this, ListActivity.class);
-                            startActivity(intent);
-                           Toast.makeText(LoginActivity.this, "true" +serverResponse.getStatus(), Toast.LENGTH_SHORT).show();
-                       }
-                    }
+                            if (serverResponse.getStatus()) {
+                                Intent intent = new Intent(LoginActivity.this, ListActivity.class);
+                                startActivity(intent);
+                            } else {
+                                editTextEmail.setError("incorrect email or password");
+                                editTextEmail.requestFocus();
+                            }
+                        }
 
-                    @Override
-                    public void failure(RetrofitError error) {
+                        @Override
+                        public void failure(RetrofitError error) {
 
-                    }
-                });
+                        }
+                    });
+                }
             }
         });
         signUpButton.setOnClickListener(new View.OnClickListener() {
@@ -96,25 +97,37 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    void validation() {
-        if (editTextEmail.getText().toString().length() == 0) {
+ boolean validation() {
+
+       /* if (editTextEmail.getText().toString().length() == 0) {
             progressBar.setVisibility(View.GONE);
             editTextEmail.setError("email is empty");
-            editTextEmail.requestFocus();
+            editTextEmail.requestFocus();*/
 
-        } else if (editTextPassword.getText().toString().length() == 0) {
+//        } else
+            if (editTextPassword.getText().toString().length() == 0) {
             progressBar.setVisibility(View.GONE);
             editTextPassword.setError("password is empty");
             editTextPassword.requestFocus();
+                return false;
         }
+     return true;
     }
 
-    void emailValidation() {
-        if (!editTextEmail.getText().toString().contains("@")) {
+    boolean emailValidation() {
+        String regex = "^(.+)@(.+)\\.(.+)$";
+        String email = editTextEmail.getText().toString();
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+        if (!matcher.matches()) {
             progressBar.setVisibility(View.GONE);
             editTextEmail.setError("incorrect email");
             editTextEmail.requestFocus();
+            return false;
         }
+        return true;
     }
+
+
 
 }

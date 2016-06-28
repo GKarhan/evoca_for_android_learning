@@ -36,4 +36,6 @@
     Hello blank fragmentHello blank fragmentHello blank fragmentHello blank fragmentHello blank fragment
     </string>
     <string name="dialog_message"></string>
+    <string name="choose_lesson">Ստացե՛ք տեսական գիտելիքներ Ձեզ հետաքրքրող թեմայի վերաբերյալ</string>
+    <string name="choose_exercise">Ստուգե՛ք և ամրապնդե՛ք Ձեր գիտելիքները գործնական վարժությունների միջոցով</string>
 </resources>

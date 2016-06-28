@@ -70,7 +70,7 @@
                 android:id="@+id/et_login_email"
                 android:background="@drawable/login_username"
                 android:layout_width="match_parent"
-                android:layout_weight="0.9"
+                android:layout_weight="0.7"
                 android:layout_height="0dp" />
 
             <TextView
@@ -86,7 +86,7 @@
                 android:paddingLeft="5dp"
                 android:id="@+id/et_login_password"
                 android:inputType="textPassword"
-                android:layout_weight="0.9"
+                android:layout_weight="0.7"
                 android:background="@drawable/login_username"
                 android:layout_width="match_parent"
                 android:layout_height="0dp" />
@@ -96,8 +96,8 @@
                 android:background="@drawable/login_login_button"
                 android:textAllCaps="false"
                 android:text="Login"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="33dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="15dp"
                 android:textSize="18sp"
                 android:layout_weight="1.1"
                 android:textColor="#F4F4F4"
@@ -128,7 +128,7 @@
                 android:background="@drawable/login_login_button"
                 android:text="Sign up"
                 android:textSize="18sp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:textAllCaps="false"
                 android:textColor="#F4F4F4"
                 android:layout_width="match_parent"
