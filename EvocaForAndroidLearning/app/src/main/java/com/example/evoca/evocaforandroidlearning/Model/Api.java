@@ -31,5 +31,10 @@ public interface Api {
     void postContent(@Field("postTitle") String postTitle,
                      Callback<List<ServerResponse>> serverResponseCallback);
 
+    @FormUrlEncoded
+    @POST("/content")
+    void postContentGroup(@Field("postTitle") String postTitle,
+                          Callback<List<Group>> serverResponseCallback);
+
 
 }

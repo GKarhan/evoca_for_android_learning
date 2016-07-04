@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
 //        animation.setDuration(7000);
 //
 //        img.startAnimation(animation);
-
         getSupportFragmentManager().beginTransaction().replace(R.id.container, ScreenFragment.newInstance()).commit();
 
         int Delay = 5000;

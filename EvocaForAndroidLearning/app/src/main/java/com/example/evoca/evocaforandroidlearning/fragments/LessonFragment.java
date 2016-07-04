@@ -45,7 +45,7 @@ public class LessonFragment extends Fragment {
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
             @Override
             public void onClick(View v) {
-                transaction.replace(R.id.listframe,ExerciseFragment.newInstance()).commit();
+                transaction.replace(R.id.list_frame,ExerciseFragment.newInstance()).commit();
             }
         });
 
