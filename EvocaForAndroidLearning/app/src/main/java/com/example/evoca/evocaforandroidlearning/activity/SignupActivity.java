@@ -85,7 +85,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 CustomDialog custom = new CustomDialog();
                                 custom.show(getSupportFragmentManager(), null);
                             } else {
-                                editTextSignUpEmail.setError("This mail already exists ");
+                                editTextSignUpEmail.setError(getResources().getString(R.string.already_exists));
                                 editTextSignUpEmail.requestFocus();
                             }
                         }
@@ -101,37 +101,35 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
     }
-
-
     boolean validation() {
 
         if (editTextFistName.getText().toString().length() == 0) {
             progressBar.setVisibility(View.GONE);
-            editTextFistName.setError("Fill out the required field");
+            editTextFistName.setError(getResources().getString(R.string.is_empty));
             editTextFistName.requestFocus();
             return false;
 
         } else if (editTextLastName.getText().toString().length() == 0) {
             progressBar.setVisibility(View.GONE);
-            editTextLastName.setError("Fill out the required field");
+            editTextLastName.setError(getResources().getString(R.string.is_empty));
             editTextLastName.requestFocus();
             return false;
 
         }else if (editTextSignUpEmail.getText().toString().length() == 0) {
             progressBar.setVisibility(View.GONE);
-            editTextSignUpEmail.setError("Fill out the required field");
+            editTextSignUpEmail.setError(getResources().getString(R.string.is_empty));
             editTextSignUpEmail.requestFocus();
             return false;
         }
         else if (editTextSignUpPass.getText().toString().length() == 0) {
             progressBar.setVisibility(View.GONE);
-            editTextSignUpPass.setError("Fill out the required field");
+            editTextSignUpPass.setError(getResources().getString(R.string.is_empty));
             editTextSignUpPass.requestFocus();
             return false;
         }
         else if (editTextSignUpConfirmPass.getText().toString().length() == 0) {
             progressBar.setVisibility(View.GONE);
-            editTextSignUpConfirmPass.setError("Fill out the required field");
+            editTextSignUpConfirmPass.setError(getResources().getString(R.string.is_empty));
             editTextSignUpConfirmPass.requestFocus();
             return false;
         }
@@ -151,7 +149,7 @@ public class SignUpActivity extends AppCompatActivity {
         Matcher matcher = pattern.matcher(email);
         if (!matcher.matches()) {
             progressBar.setVisibility(View.GONE);
-            editTextSignUpEmail.setError("incorrect email");
+            editTextSignUpEmail.setError(getResources().getString(R.string.incorrect_email));
             editTextSignUpEmail.requestFocus();
             return false;
         }
@@ -163,7 +161,7 @@ public class SignUpActivity extends AppCompatActivity {
         String passConfirm = editTextSignUpConfirmPass.getText().toString();
         if (!pass.equals(passConfirm)){
             progressBar.setVisibility(View.GONE);
-            editTextSignUpConfirmPass.setError("chi ham@nknum");
+            editTextSignUpConfirmPass.setError(getResources().getString(R.string.confiramtion_err));
             editTextSignUpConfirmPass.requestFocus();
             return false;
         }

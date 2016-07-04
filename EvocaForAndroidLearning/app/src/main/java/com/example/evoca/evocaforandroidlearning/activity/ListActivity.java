@@ -8,15 +8,20 @@ import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
+import com.example.evoca.evocaforandroidlearning.Model.ServerResponse;
 import com.example.evoca.evocaforandroidlearning.adapter.CustomAdapter;
 import com.example.evoca.evocaforandroidlearning.R;
 import com.example.evoca.evocaforandroidlearning.fragments.LessonFragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListActivity extends AppCompatActivity  {
 
     private FragmentTransaction transaction;
+    List<ServerResponse> serverResponses;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +32,13 @@ public class ListActivity extends AppCompatActivity  {
         ArrayList<ArrayList<String>> groups = new ArrayList<ArrayList<String>>();
         ArrayList<String> children1 = new ArrayList<String>();
         ArrayList<String> children2 = new ArrayList<String>();
-        ArrayList<String> children3 = new ArrayList<String>();
-        ArrayList<String> children4 = new ArrayList<String>();
-        ArrayList<String> children5 = new ArrayList<String>();
+//        ArrayList<String> children3 = new ArrayList<String>();
+//        ArrayList<String> children4 = new ArrayList<String>();
+//        ArrayList<String> children5 = new ArrayList<String>();
+
+
+
+
         children1.add("Child_1");
         children1.add("Child_2");
 
@@ -38,11 +47,11 @@ public class ListActivity extends AppCompatActivity  {
         children2.add("Child_2");
         children2.add("Child_3");
         groups.add(children2);
-        children3.add("Child_1");
-        children3.add("Child_2");
-        children3.add("Child_3");
-        children3.add("Child___4");
-        groups.add(children3);
+//        children3.add("Child_1");
+//        children3.add("Child_2");
+//        children3.add("Child_3");
+//        children3.add("Child___4");
+//        groups.add(children3);
         //Создаем адаптер и передаем context и список с данными
 //
 

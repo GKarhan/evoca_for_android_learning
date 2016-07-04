@@ -1,5 +1,7 @@
 package com.example.evoca.evocaforandroidlearning.Model;
 
+import java.util.List;
+
 import retrofit.Callback;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
@@ -23,4 +25,11 @@ public interface Api {
                               @Field("first_name") String firstName,
                               @Field("last_name") String lastName,
                               Callback<ServerResponse> serverResponseCallback);
+
+    @FormUrlEncoded
+    @POST("/content")
+    void postContent(@Field("postTitle") String postTitle,
+                     Callback<List<ServerResponse>> serverResponseCallback);
+
+
 }

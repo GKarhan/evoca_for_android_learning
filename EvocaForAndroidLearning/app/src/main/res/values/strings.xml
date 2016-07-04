@@ -38,4 +38,23 @@
     <string name="dialog_message"></string>
     <string name="choose_lesson">Ստացե՛ք տեսական գիտելիքներ Ձեզ հետաքրքրող թեմայի վերաբերյալ</string>
     <string name="choose_exercise">Ստուգե՛ք և ամրապնդե՛ք Ձեր գիտելիքները գործնական վարժությունների միջոցով</string>
+    <string name="lessons">Դասեր</string>
+    <string name="exercises">Վարժություններ</string>
+    <string name="name">Անուն*։</string>
+    <string name="surname">Ազգանուն*։</string>
+    <string name="email">էլ․հասցե*։</string>
+    <string name="password">Գաղտնաբառ*։</string>
+    <string name="confirm_password">Հասատատել գաղտնաբառը*։</string>
+    <string name="sign_up">Գրանցվել</string>
+    <string name="sign_in">Մուտք</string>
+    <string name="sign_in_with_facebook">Մուտք գործել </string>
+    <string name="login_your_account">Մուտք գործեք ձեր էջ </string>
+    <string name="fill_the_form">Լրացրեք տվյալները </string>
+    <string name="submit">Հաստատել</string>
+    <string name="incorrect_email">Տվյալ էլ.փոստի հասցեն սխալ է</string>
+    <string name="password_is_empty">Դաշտը դատարկ է</string>
+    <string name="is_empty">Խնդրում ենք լրացնել դաշտը</string>
+    <string name="already_exists">Տվյալ էլ փոստի հասցեն օգտագործվում է</string>
+    <string name="confiramtion_err">Գաղտնաբառը չի համընկնում</string>
+
 </resources>

@@ -9,6 +9,34 @@ public class ServerResponse {
     String email;
     String password;
     Boolean status;
+    String postTitle;
+    String testContent;
+    String main_title;
+
+
+    public String getMain_title() {
+        return main_title;
+    }
+
+    public void setMain_title(String main_title) {
+        this.main_title = main_title;
+    }
+
+    public String getPostTitle() {
+        return postTitle;
+    }
+
+    public void setPostTitle(String postTitle) {
+        this.postTitle = postTitle;
+    }
+
+    public String getTestContent() {
+        return testContent;
+    }
+
+    public void setTestContent(String testContent) {
+        this.testContent = testContent;
+    }
 
     public Boolean getStatus() {
         return status;

@@ -58,6 +58,7 @@ public class LoginActivity extends AppCompatActivity  {
                   validation();
                   emailValidation();
                 if (validation() && emailValidation() ) {
+
                     RestAdapter restAdapter = new RestAdapter.Builder()
                             .setLogLevel(RestAdapter.LogLevel.FULL)
                             .setEndpoint("http://api.evocalab.com/evoca/test")
@@ -69,16 +70,15 @@ public class LoginActivity extends AppCompatActivity  {
                         @Override
                         public void success(ServerResponse serverResponse, Response response) {
                             progressBar.setVisibility(View.GONE);
-
                             if (serverResponse.getStatus()) {
                                 Intent intent = new Intent(LoginActivity.this, ListActivity.class);
                                 startActivity(intent);
                             } else {
-                                editTextEmail.setError("incorrect email or password");
-                                editTextEmail.requestFocus();
+
+                                    editTextEmail.setError(getResources().getString(R.string.incorrect_email));
+                                    editTextEmail.requestFocus();
                             }
                         }
-
                         @Override
                         public void failure(RetrofitError error) {
 
@@ -99,15 +99,10 @@ public class LoginActivity extends AppCompatActivity  {
 
  boolean validation() {
 
-       /* if (editTextEmail.getText().toString().length() == 0) {
-            progressBar.setVisibility(View.GONE);
-            editTextEmail.setError("email is empty");
-            editTextEmail.requestFocus();*/
 
-//        } else
             if (editTextPassword.getText().toString().length() == 0) {
             progressBar.setVisibility(View.GONE);
-            editTextPassword.setError("password is empty");
+            editTextPassword.setError(getResources().getString(R.string.password_is_empty));
             editTextPassword.requestFocus();
                 return false;
         }
@@ -119,9 +114,15 @@ public class LoginActivity extends AppCompatActivity  {
         String email = editTextEmail.getText().toString();
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
+        if (editTextEmail.getText().toString().length() == 0) {
+            progressBar.setVisibility(View.GONE);
+            editTextEmail.setError(getResources().getString(R.string.is_empty));
+            editTextEmail.requestFocus();
+
+        }else
         if (!matcher.matches()) {
             progressBar.setVisibility(View.GONE);
-            editTextEmail.setError("incorrect email");
+            editTextEmail.setError(getResources().getString(R.string.incorrect_email));
             editTextEmail.requestFocus();
             return false;
         }

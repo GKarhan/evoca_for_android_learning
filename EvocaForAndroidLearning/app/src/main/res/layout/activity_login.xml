@@ -40,7 +40,7 @@
             android:layout_weight="4">
 
             <TextView
-                android:text="Login to your account"
+                android:text="@string/login_your_account"
                 android:gravity="bottom"
                 android:paddingBottom="5dp"
                 android:paddingLeft="5dp"
@@ -57,7 +57,7 @@
                 />
 
             <TextView
-                android:text="Email:"
+                android:text="@string/email"
                 android:gravity="center_vertical"
                 android:textSize="16sp"
                 android:paddingLeft="5dp"
@@ -74,7 +74,7 @@
                 android:layout_height="0dp" />
 
             <TextView
-                android:text="Password:"
+                android:text="@string/password"
                 android:gravity="center_vertical"
                 android:textSize="16sp"
                 android:paddingLeft="5dp"
@@ -95,7 +95,7 @@
                 android:id="@+id/btn_login"
                 android:background="@drawable/login_login_button"
                 android:textAllCaps="false"
-                android:text="Login"
+                android:text="@string/sign_in"
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="15dp"
                 android:textSize="18sp"
@@ -104,29 +104,36 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp" />
 
-            <FrameLayout
+            <RelativeLayout
                 android:background="#C3C3C3"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:padding="5dp">
 
+
+
                 <Button
                     android:id="@+id/btn_login_with_facebook"
-                    android:drawableRight="@drawable/faace"
-                    android:layout_gravity="center"
-                    android:text="Login with facebook"
+                    android:gravity="center"
+                    android:text="@string/sign_in_with_facebook"
                     android:textAllCaps="false"
                     android:textColor="#367400"
                     android:background="@drawable/login_share_button"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
-            </FrameLayout>
+
+                <Button
+                    android:layout_alignRight="@+id/btn_login_with_facebook"
+                    android:background="@drawable/faace"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
 
             <Button
                 android:id="@+id/btn_login_sign_up"
                 android:background="@drawable/login_login_button"
-                android:text="Sign up"
+                android:text="@string/sign_up"
                 android:textSize="18sp"
                 android:layout_marginTop="20dp"
                 android:textAllCaps="false"
