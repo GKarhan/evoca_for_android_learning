@@ -1,15 +1,18 @@
 package com.example.evoca.evocaforandroidlearning.activity;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.evoca.evocaforandroidlearning.Model.Api;
+import com.example.evoca.evocaforandroidlearning.Model.Child;
 import com.example.evoca.evocaforandroidlearning.R;
 import com.example.evoca.evocaforandroidlearning.adapter.ExpandableListAdapter;
 import com.example.evoca.evocaforandroidlearning.Model.Group;
@@ -26,6 +29,7 @@ import retrofit.client.Response;
 public class ListActivity extends AppCompatActivity implements  ExpandableListView.OnChildClickListener {
 
     private ProgressBar progressBar;
+    private TextView textView;
 
     /*our expandable adapter */
     ExpandableListAdapter expandableListAdapter;
@@ -42,6 +46,7 @@ public class ListActivity extends AppCompatActivity implements  ExpandableListVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+        textView = (TextView) findViewById(R.id.aaaaa);
      /*genarate data for list view*/
         genarateData();
 
@@ -115,8 +120,6 @@ public class ListActivity extends AppCompatActivity implements  ExpandableListVi
 
             }
         });*/
-
-
     }
 
 
@@ -124,9 +127,22 @@ public class ListActivity extends AppCompatActivity implements  ExpandableListVi
     public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
         Toast.makeText(ListActivity.this, "sasasas", Toast.LENGTH_SHORT).show();
         expandableListView.removeAllViewsInLayout();
+        Child childText =  expandableListAdapter.getChild(groupPosition, childPosition);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.list_frame, LessonFragment.newInstance()).commit();
+        System.out.println("*******" + childText.getText());
 
+        LessonFragment argumentFragment = new LessonFragment();//Get Fragment Instance
+        Bundle data = new Bundle();//Use bundle to pass data
+        data.putString("data", childText.getText());//put string, int, etc in bundle with a key value
+        data.putString("title",childText.getTitle());
+        argumentFragment.setArguments(data);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.list_frame, argumentFragment).commit();
+        
         return true;
     }
+
+
+
+
 }

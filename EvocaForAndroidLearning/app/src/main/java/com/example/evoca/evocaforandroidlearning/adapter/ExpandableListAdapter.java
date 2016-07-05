@@ -9,9 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.evoca.evocaforandroidlearning.Model.Child;
 import com.example.evoca.evocaforandroidlearning.Model.Group;
 import com.example.evoca.evocaforandroidlearning.R;
+import com.example.evoca.evocaforandroidlearning.activity.ListActivity;
 
 import java.util.ArrayList;
 
@@ -60,16 +63,17 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         }
         return 0;
     }
-    public View getChildView(int groupPosition, int childPosition, boolean isLastChild,
+    public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild,
                              View convertView, ViewGroup parent) {
 
-       Child  currentChild = getChild(groupPosition,childPosition);
+       final Child  currentChild = getChild(groupPosition,childPosition);
 
         if(convertView==null) {
             convertView=inflater.inflate(R.layout.child_view, parent,false);
         }
         TextView childName = (TextView) convertView.findViewById(R.id.textViewChildName);
         childName.setText(currentChild.getTitle());
+        currentChild.getText();
         // kam el childName.setText(currentChild.getText());
         return convertView;
     }
@@ -88,7 +92,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         return groupPosition;
     }
 
-    public View getGroupView(int groupPosition, boolean isExpanded, View convertView,
+    public View getGroupView(final int groupPosition, boolean isExpanded, View convertView,
                              ViewGroup parent) {
 
         Group currentGroup = getGroup(groupPosition);
@@ -97,6 +101,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         }
         TextView groupName = (TextView) convertView.findViewById(R.id.textViewGroupName);
         groupName.setText(currentGroup.getMain_title());
+
         return convertView;
     }
 

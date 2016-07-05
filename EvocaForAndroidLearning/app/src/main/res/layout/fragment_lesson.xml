@@ -16,9 +16,9 @@
             android:id="@+id/tv_lesson"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="90dp"
             android:text="Lesson 1"
-            android:textSize="18dp" />
+            />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -38,9 +38,10 @@
             android:layout_height="450dp">
 
             <TextView
+                android:id="@+id/aaaaa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/text" />
+                android:text="" />
         </ScrollView>
     </LinearLayout>
 

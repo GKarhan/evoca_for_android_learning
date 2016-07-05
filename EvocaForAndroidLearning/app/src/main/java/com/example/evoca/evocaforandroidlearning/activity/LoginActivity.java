@@ -29,6 +29,7 @@ public class LoginActivity extends AppCompatActivity  {
     private EditText editTextEmail;
     private EditText editTextPassword;
     private ProgressBar progressBar;
+    private Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,7 @@ public class LoginActivity extends AppCompatActivity  {
         editTextEmail = (EditText) findViewById(R.id.et_login_email);
         editTextPassword = (EditText) findViewById(R.id.et_login_password);
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+
     }
 
     void listener() {
@@ -74,8 +76,7 @@ public class LoginActivity extends AppCompatActivity  {
                                 Intent intent = new Intent(LoginActivity.this, ListActivity.class);
                                 startActivity(intent);
                             } else {
-
-                                    editTextEmail.setError(getResources().getString(R.string.incorrect_email));
+                                    editTextEmail.setError(getResources().getString(R.string.incorrect_email_or_password));
                                     editTextEmail.requestFocus();
                             }
                         }
@@ -98,8 +99,6 @@ public class LoginActivity extends AppCompatActivity  {
     }
 
  boolean validation() {
-
-
             if (editTextPassword.getText().toString().length() == 0) {
             progressBar.setVisibility(View.GONE);
             editTextPassword.setError(getResources().getString(R.string.password_is_empty));
@@ -122,7 +121,7 @@ public class LoginActivity extends AppCompatActivity  {
         }else
         if (!matcher.matches()) {
             progressBar.setVisibility(View.GONE);
-            editTextEmail.setError(getResources().getString(R.string.incorrect_email));
+            editTextEmail.setError(getResources().getString(R.string.incorrect_email_or_password));
             editTextEmail.requestFocus();
             return false;
         }

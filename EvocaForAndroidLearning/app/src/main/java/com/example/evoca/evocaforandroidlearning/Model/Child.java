@@ -10,6 +10,9 @@ public class Child {
     private String text;
     private String has_exam;
 
+
+
+
     /*public String getTitle() {
         return title;
     }
