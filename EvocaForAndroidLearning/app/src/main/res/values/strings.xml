@@ -52,6 +52,7 @@
     <string name="fill_the_form">Լրացրեք տվյալները </string>
     <string name="submit">Հաստատել</string>
     <string name="incorrect_email">Տվյալ էլ.փոստի հասցեն սխալ է</string>
+    <string name="incorrect_email_or_password">Տվյալ էլ.փոստի հասցեն կամ գաղտնաբառը սխալ է</string>
     <string name="password_is_empty">Դաշտը դատարկ է</string>
     <string name="is_empty">Խնդրում ենք լրացնել դաշտը</string>
     <string name="already_exists">Տվյալ էլ փոստի հասցեն օգտագործվում է</string>

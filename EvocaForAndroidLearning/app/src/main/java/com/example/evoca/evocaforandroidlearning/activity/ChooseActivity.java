@@ -30,6 +30,7 @@ public class ChooseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ChooseActivity.this, ListActivity.class);
+
                 startActivity(intent);
             }
         });

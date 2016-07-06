@@ -1,8 +1,5 @@
 package com.example.evoca.evocaforandroidlearning.activity;
 
-/**
- * Created by Evoca-PC on 6/28/2016.
- */
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
