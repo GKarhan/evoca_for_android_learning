@@ -7,15 +7,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.evoca.evocaforandroidlearning.R;
 import com.example.evoca.evocaforandroidlearning.activity.LoginActivity;
-import com.example.evoca.evocaforandroidlearning.activity.SignUpActivity;
 
 /**
  * Created by Vacho on 27.06.2016.
