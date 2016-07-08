@@ -57,5 +57,7 @@
     <string name="is_empty">Խնդրում ենք լրացնել դաշտը</string>
     <string name="already_exists">Տվյալ էլ փոստի հասցեն օգտագործվում է</string>
     <string name="confiramtion_err">Գաղտնաբառը չի համընկնում</string>
+    <string name="dialog_connection_title">Ջգուշացում</string>
+    <string name="dialog_connection_message">Խնդրում ենք ստուգել միացումը ինտերնետին</string>
 
 </resources>

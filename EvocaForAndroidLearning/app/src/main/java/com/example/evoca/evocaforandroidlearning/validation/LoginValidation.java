@@ -13,17 +13,6 @@ import java.util.regex.Pattern;
  */
 public class LoginValidation extends LoginActivity {
 
- public  static    boolean valis(EditText email){
-        String regex = "^(.+)@(.+)\\.(.+)$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(email.getText().toString());
-        if (!matcher.matches()) {
-            email.setVisibility(View.GONE);
-            email.setError("incorrect email");
-            email.requestFocus();
-            return false;
-        }
-        return true;
-    }
+
     }
 

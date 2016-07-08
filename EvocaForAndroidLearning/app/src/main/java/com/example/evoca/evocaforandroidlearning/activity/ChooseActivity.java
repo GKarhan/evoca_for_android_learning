@@ -1,6 +1,10 @@
 package com.example.evoca.evocaforandroidlearning.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +23,25 @@ public class ChooseActivity extends AppCompatActivity {
 
         findViews();
         listener();
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(this.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if (networkInfo!= null &&networkInfo.isConnected()){
+
+        }else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(ChooseActivity.this);
+            builder.setTitle(getResources().getString(R.string.dialog_connection_title))
+                    .setMessage(getResources().getString(R.string.dialog_connection_message))
+                    .setIcon(R.drawable.connection_lost)
+                    .setCancelable(false)
+                    .setNegativeButton("Оk", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                            finish();
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
 
     }
     void findViews(){

@@ -33,9 +33,9 @@ public class CustomDialog extends DialogFragment{
                 .setTitle("Evoca")
                 .setMessage("Duq Grancvel eq!!!!!!!!!")
                 .setPositiveButton("OK", okButtonListerner)
-                .setNegativeButton("cancel", null)
-                .setIcon(R.drawable.thanks)
-                .setNeutralButton("close", null);
+               // .setNegativeButton("cancel", null)
+                .setIcon(R.drawable.thanks);
+              //  .setNeutralButton("close", null);
         setCancelable(false);
 
         return builder.create();

@@ -1,7 +1,10 @@
 package com.example.evoca.evocaforandroidlearning.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 
@@ -31,6 +34,7 @@ public class ListActivity extends AppCompatActivity implements  ExpandableListVi
     private ProgressBar progressBar;
     private TextView textView;
 
+
     /*our expandable adapter */
     ExpandableListAdapter expandableListAdapter;
 
@@ -47,6 +51,8 @@ public class ListActivity extends AppCompatActivity implements  ExpandableListVi
         setContentView(R.layout.activity_list);
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
         textView = (TextView) findViewById(R.id.aaaaa);
+
+
      /*genarate data for list view*/
         genarateData();
 
@@ -134,7 +140,7 @@ public class ListActivity extends AppCompatActivity implements  ExpandableListVi
         LessonFragment argumentFragment = new LessonFragment();//Get Fragment Instance
         Bundle data = new Bundle();//Use bundle to pass data
         data.putString("data", childText.getText());//put string, int, etc in bundle with a key value
-        data.putString("title",childText.getTitle());
+        data.putString("title", childText.getTitle());
         argumentFragment.setArguments(data);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.list_frame, argumentFragment).commit();

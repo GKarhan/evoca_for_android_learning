@@ -1,18 +1,19 @@
 package com.example.evoca.evocaforandroidlearning.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 
 import com.example.evoca.evocaforandroidlearning.R;
-import com.example.evoca.evocaforandroidlearning.fragments.LessonFragment;
 import com.example.evoca.evocaforandroidlearning.fragments.ScreenFragment;
 
 public class MainActivity extends AppCompatActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
 //        animation.setDuration(7000);
 //
 //        img.startAnimation(animation);
+
+
         getSupportFragmentManager().beginTransaction().replace(R.id.container, ScreenFragment.newInstance()).commit();
 
         int Delay = 5000;
@@ -38,4 +41,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }, Delay);
     }
+
 }
