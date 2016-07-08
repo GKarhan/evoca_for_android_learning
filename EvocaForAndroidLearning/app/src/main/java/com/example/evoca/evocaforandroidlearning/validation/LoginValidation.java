@@ -13,6 +13,5 @@ import java.util.regex.Pattern;
  */
 public class LoginValidation extends LoginActivity {
 
-
-    }
+}
 
