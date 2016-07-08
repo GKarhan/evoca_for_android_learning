@@ -1,4 +1,7 @@
-package com.example.evoca.evocaforandroidlearning.Model;
+package com.example.evoca.evocaforandroidlearning.api;
+
+import com.example.evoca.evocaforandroidlearning.Model.Group;
+import com.example.evoca.evocaforandroidlearning.Model.ServerResponse;
 
 import java.util.List;
 

@@ -1,9 +1,5 @@
 package com.example.evoca.evocaforandroidlearning.activity;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -14,11 +10,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.evoca.evocaforandroidlearning.Model.Api;
+import com.example.evoca.evocaforandroidlearning.api.Api;
 import com.example.evoca.evocaforandroidlearning.Model.Child;
 import com.example.evoca.evocaforandroidlearning.R;
 import com.example.evoca.evocaforandroidlearning.adapter.ExpandableListAdapter;
 import com.example.evoca.evocaforandroidlearning.Model.Group;
+import com.example.evoca.evocaforandroidlearning.api.ApiManager;
 import com.example.evoca.evocaforandroidlearning.fragments.LessonFragment;
 
 import java.util.ArrayList;
@@ -75,26 +72,14 @@ public class ListActivity extends AppCompatActivity implements  ExpandableListVi
     }
     //Generate dummy data for list view
     public void genarateData() {
-        RestAdapter restAdapter = new RestAdapter.Builder()
-                .setLogLevel(RestAdapter.LogLevel.FULL)
-                .setEndpoint("http://api.evocalab.com/evoca/test")
-                .build();
 
-        Api client = restAdapter.create(Api.class);
-
-        client.postContentGroup("testContent", new Callback<List<Group>>() {
+        ApiManager.getInstance().getClient().postContentGroup("testContent", new Callback<List<Group>>() {
             @Override
             public void success(List<Group> groups, Response response) {
                 progressBar.setVisibility(View.GONE);
                 groupArrayList.clear();
                 groupArrayList.addAll(groups);
-
-                /*for (Group group : groupArrayList) {
-                    group.setChildrens(childrens);
-                    childrens.put(group, group.getCourses());
-                }*/
                 expandableListAdapter.notifyDataSetChanged();
-
             }
 
             @Override
@@ -102,30 +87,6 @@ public class ListActivity extends AppCompatActivity implements  ExpandableListVi
 
             }
         });
-
-        /*client.postContentChild("testContent", new Callback<List<Child>>() {
-            @Override
-            public void success(List<Child> children, Response response) {
-                childrens.clear();
-                for (Child child : children) {
-                    child.getTitle();
-                }
-
-                for (Group group : groupArrayList) {
-                    group.getTitle();
-                    group.setChildrens(childrens);
-
-                }
-                //childrens.addAll(children);
-
-                expandableListAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-
-            }
-        });*/
     }
 
 
@@ -147,8 +108,4 @@ public class ListActivity extends AppCompatActivity implements  ExpandableListVi
         
         return true;
     }
-
-
-
-
 }

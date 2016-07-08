@@ -11,10 +11,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.evoca.evocaforandroidlearning.R;
+import com.example.evoca.evocaforandroidlearning.util.PrefUtil;
 
 
 public class LessonFragment extends Fragment {
-
 
     private Button exerciseButton;
     TextView textViewText;
@@ -22,7 +22,6 @@ public class LessonFragment extends Fragment {
     public LessonFragment() {
         // Required empty public constructor
     }
-
 
     public static LessonFragment newInstance() {
         LessonFragment fragment = new LessonFragment();
@@ -51,6 +50,10 @@ public class LessonFragment extends Fragment {
 
         String getArgument = getArguments().getString("data");
         textViewText.setText(getArgument);
+
+        if(!PrefUtil.isAuthanticated) {
+            exerciseButton.setVisibility(View.GONE);
+        }
         
         exerciseButton.setOnClickListener(new View.OnClickListener() {
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
