@@ -1,9 +1,13 @@
 package com.example.evoca.evocaforandroidlearning.activity;
 
+import android.content.Intent;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.ProgressBar;
@@ -17,6 +21,7 @@ import com.example.evoca.evocaforandroidlearning.adapter.ExpandableListAdapter;
 import com.example.evoca.evocaforandroidlearning.Model.Group;
 import com.example.evoca.evocaforandroidlearning.api.ApiManager;
 import com.example.evoca.evocaforandroidlearning.fragments.LessonFragment;
+import com.example.evoca.evocaforandroidlearning.util.PrefUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,12 +45,16 @@ public class ListActivity extends AppCompatActivity implements  ExpandableListVi
 
     /*list items*/
     ArrayList<Group> groupArrayList =new ArrayList<Group>();
+    private MenuItem bedMenuItem;
     //ArrayList<Child> childrens=new ArrayList<Child>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
+        setSupportActionBar(toolbar);
+
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
         textView = (TextView) findViewById(R.id.aaaaa);
 
@@ -65,11 +74,7 @@ public class ListActivity extends AppCompatActivity implements  ExpandableListVi
         expandableListView.setOnChildClickListener(this);
 
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        //   getMenuInflater().inflate(R.menu.activity_main, menu);
-        return true;
-    }
+
     //Generate dummy data for list view
     public void genarateData() {
 
@@ -108,4 +113,29 @@ public class ListActivity extends AppCompatActivity implements  ExpandableListVi
         
         return true;
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        bedMenuItem =(MenuItem) menu.findItem(R.id.log_out_item);
+       
+        getMenuInflater().inflate(R.menu.menu, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == R.id.log_out_item){
+            PrefUtil.removeToPrefs(ListActivity.this, PrefUtil.PREFS_LOGIN_USERNAME_KEY, PrefUtil.PREFS_LOGIN_PASSWORD_KEY);
+                PrefUtil.isAuthanticated = false;
+                Intent intent = new Intent(ListActivity.this, ChooseActivity.class);
+                startActivity(intent);
+                finish();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
 }

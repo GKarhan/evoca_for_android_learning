@@ -159,7 +159,7 @@ public class LoginActivity extends AppCompatActivity  {
                         // Saving user credentials on successful login case
                         PrefUtil.saveToPrefs(LoginActivity.this, PrefUtil.PREFS_LOGIN_USERNAME_KEY, email);
                         PrefUtil.saveToPrefs(LoginActivity.this, PrefUtil.PREFS_LOGIN_PASSWORD_KEY, password);
-
+                        System.out.println("*****"+serverResponse.getStatus());
                         PrefUtil.isAuthanticated = true;
 
                         Intent intent = new Intent(LoginActivity.this, ListActivity.class);
