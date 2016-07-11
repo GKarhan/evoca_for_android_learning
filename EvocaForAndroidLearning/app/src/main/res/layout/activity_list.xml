@@ -1,51 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/list_frame"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/toolbar_actionbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="33dp"
-        android:layout_marginRight="33dp"
+        android:layout_height="?android:actionBarSize"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <LinearLayout
+
+        
         android:orientation="vertical"
-        tools:context=".activity.ListActivity">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_marginTop="35dp"
-            android:layout_height="67dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/logo" />
+        <LinearLayout
+            android:layout_marginTop="25dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:paddingBottom="15dp"
+            android:layout_height="0dp"
+            android:layout_weight="1.3">
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
-
-            <ProgressBar
-                android:id="@+id/progress_bar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center"
-                android:indeterminateDrawable="@drawable/progress_bar"
-                android:indeterminateOnly="true"
-                android:visibility="visible" />
-
-            <ExpandableListView
-                android:id="@+id/expandableListView"
+            <ImageView
+                android:src="@drawable/logo"
+                android:layout_gravity="center_horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:indicatorLeft="250dp"
-                android:indicatorRight="300dp" />
+                android:layout_height="match_parent" />
+        </LinearLayout>
 
-        </RelativeLayout>
+        <LinearLayout
+            android:paddingRight="25dp"
+            android:paddingLeft="25dp"
+            android:paddingBottom="25dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:indeterminateDrawable="@drawable/progress_bar"
+                    android:indeterminateOnly="true"
+                    android:visibility="visible" />
+
+                <ExpandableListView
+                    android:id="@+id/expandableListView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:indicatorLeft="250dp"
+                    android:indicatorRight="300dp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
     </LinearLayout>
+
 </RelativeLayout>

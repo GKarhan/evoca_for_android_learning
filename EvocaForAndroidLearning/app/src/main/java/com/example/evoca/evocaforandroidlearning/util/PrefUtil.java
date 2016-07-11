@@ -22,6 +22,12 @@ public class PrefUtil {
         editor.putString(key, value);
         editor.commit();
     }
+//
+    public static void removeToPrefs(Context context,String key, String value){
+        SharedPreferences.Editor editor = context.getSharedPreferences(KEY, Activity.MODE_PRIVATE).edit();
+        editor.clear();
+        editor.commit();
+    }
 
     /**
      * Called to retrieve required value from shared preferences, identified by given key.
