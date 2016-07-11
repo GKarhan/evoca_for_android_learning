@@ -104,6 +104,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp" />
 
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/btn_login_with_facebook"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp" />
+
             <RelativeLayout
                 android:background="#C3C3C3"
                 android:layout_weight="1"
@@ -113,7 +121,7 @@
 
 
 
-                <Button
+                <!--<Button
                     android:id="@+id/btn_login_with_facebook"
                     android:gravity="center"
                     android:text="@string/sign_in_with_facebook"
@@ -121,13 +129,14 @@
                     android:textColor="#367400"
                     android:background="@drawable/login_share_button"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"/>-->
 
-                <Button
+
+                <!--<Button
                     android:layout_alignRight="@+id/btn_login_with_facebook"
                     android:background="@drawable/faace"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content" />-->
             </RelativeLayout>
 
             <Button

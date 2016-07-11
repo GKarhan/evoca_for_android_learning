@@ -14,6 +14,13 @@ import com.example.evoca.evocaforandroidlearning.Model.ServerResponse;
 import com.example.evoca.evocaforandroidlearning.R;
 import com.example.evoca.evocaforandroidlearning.api.ApiManager;
 import com.example.evoca.evocaforandroidlearning.util.PrefUtil;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -25,16 +32,24 @@ import retrofit.client.Response;
 
 public class LoginActivity extends AppCompatActivity  {
 
+    private CallbackManager callbackManager;
+
     private Button loginButton;
     private Button signUpButton;
     private EditText editTextEmail;
     private EditText editTextPassword;
     private ProgressBar progressBar;
+    private LoginButton fbLoginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        AppEventsLogger.activateApp(this);
+
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        callbackManager = CallbackManager.Factory.create();
 
         findView();
         checkAuthantication();
@@ -56,6 +71,7 @@ public class LoginActivity extends AppCompatActivity  {
         editTextEmail = (EditText) findViewById(R.id.et_login_email);
         editTextPassword = (EditText) findViewById(R.id.et_login_password);
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+        fbLoginButton = (LoginButton) findViewById(R.id.btn_login_with_facebook);
     }
 
     private void listener() {
@@ -77,6 +93,28 @@ public class LoginActivity extends AppCompatActivity  {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        fbLoginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                System.out.println("++++++++++++++++++ " + loginResult);
+
+                PrefUtil.isAuthanticated = true;
+                Intent intent = new Intent(LoginActivity.this, ListActivity.class);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onCancel() {
+                System.out.println("++++++++++++++++++ Cancel");
+
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                error.printStackTrace();
             }
         });
     }
@@ -137,5 +175,11 @@ public class LoginActivity extends AppCompatActivity  {
                     progressBar.setVisibility(View.GONE);
                 }
             });
+    }
+
+    @Override
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 }

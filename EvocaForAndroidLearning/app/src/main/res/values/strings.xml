@@ -60,4 +60,7 @@
     <string name="dialog_connection_title">Ջգուշացում</string>
     <string name="dialog_connection_message">Խնդրում ենք ստուգել միացումը ինտերնետին</string>
 
+    <!-- facebook_app_id containing the value of your Facebook App ID -->
+    <string name="facebook_app_id">141300002962546</string>
+
 </resources>
