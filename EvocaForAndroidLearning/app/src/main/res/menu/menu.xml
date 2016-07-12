@@ -4,7 +4,13 @@
     <item
         android:visible="true"
         android:id="@+id/log_out_item"
-        android:title="sad"
+        android:title=""
         android:icon="@drawable/log_out"
         app:showAsAction="always" />
+    <!--<item-->
+        <!--android:visible="false"-->
+        <!--android:id="@+id/back"-->
+        <!--android:title=""-->
+        <!--android:icon="@drawable/back_icon"-->
+        <!--app:showAsAction="always" />-->
 </menu>

@@ -48,8 +48,7 @@ public class SignUpActivity extends AppCompatActivity {
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                progressBar.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
                 String firstName = editTextFistName.getText().toString();
                 String lastName = editTextLastName.getText().toString();
                 String email = editTextSignUpEmail.getText().toString();

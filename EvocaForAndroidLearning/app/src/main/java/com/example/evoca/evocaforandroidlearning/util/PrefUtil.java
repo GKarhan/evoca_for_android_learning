@@ -45,6 +45,5 @@ public class PrefUtil {
             e.printStackTrace();
             return defaultValue;
         }
-
     }
 }

@@ -57,11 +57,9 @@ public class LoginActivity extends AppCompatActivity  {
     }
 
     private void checkAuthantication() {
-
-        progressBar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.GONE);
         String loggedInUserEmail = PrefUtil.getFromPrefs(LoginActivity.this, PrefUtil.PREFS_LOGIN_USERNAME_KEY, "");
         String loggedInUserPassword = PrefUtil.getFromPrefs(LoginActivity.this, PrefUtil.PREFS_LOGIN_PASSWORD_KEY, "");
-
         sendLoginRequest(loggedInUserEmail, loggedInUserPassword);
     }
 
@@ -109,7 +107,6 @@ public class LoginActivity extends AppCompatActivity  {
             @Override
             public void onCancel() {
                 System.out.println("++++++++++++++++++ Cancel");
-
             }
 
             @Override
@@ -159,9 +156,7 @@ public class LoginActivity extends AppCompatActivity  {
                         // Saving user credentials on successful login case
                         PrefUtil.saveToPrefs(LoginActivity.this, PrefUtil.PREFS_LOGIN_USERNAME_KEY, email);
                         PrefUtil.saveToPrefs(LoginActivity.this, PrefUtil.PREFS_LOGIN_PASSWORD_KEY, password);
-                        System.out.println("*****"+serverResponse.getStatus());
                         PrefUtil.isAuthanticated = true;
-
                         Intent intent = new Intent(LoginActivity.this, ListActivity.class);
                         startActivity(intent);
                     } else {

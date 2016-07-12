@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:paddingBottom="15dp"
             android:layout_height="0dp"
-            android:layout_weight="1.3">
+            android:layout_weight="1">
 
             <ImageView
                 android:src="@drawable/logo"
@@ -62,8 +62,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:indicatorLeft="250dp"
+                    android:groupIndicator="@drawable/aaa"
                     android:indicatorRight="300dp" />
-
             </RelativeLayout>
 
         </LinearLayout>
