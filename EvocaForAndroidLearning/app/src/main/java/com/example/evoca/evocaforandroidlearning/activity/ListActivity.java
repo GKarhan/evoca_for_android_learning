@@ -22,6 +22,8 @@ import com.example.evoca.evocaforandroidlearning.Model.Group;
 import com.example.evoca.evocaforandroidlearning.api.ApiManager;
 import com.example.evoca.evocaforandroidlearning.fragments.LessonFragment;
 import com.example.evoca.evocaforandroidlearning.util.PrefUtil;
+import com.facebook.AccessToken;
+import com.facebook.login.LoginManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -126,11 +128,15 @@ public class ListActivity extends AppCompatActivity implements  ExpandableListVi
     public boolean onOptionsItemSelected(MenuItem item) {
 
         if (item.getItemId() == R.id.log_out_item){
+
+            if(AccessToken.getCurrentAccessToken() != null){
+                LoginManager.getInstance().logOut();
+            }
             PrefUtil.removeToPrefs(ListActivity.this, PrefUtil.PREFS_LOGIN_USERNAME_KEY, PrefUtil.PREFS_LOGIN_PASSWORD_KEY);
-                PrefUtil.isAuthanticated = false;
-                Intent intent = new Intent(ListActivity.this, ChooseActivity.class);
-                startActivity(intent);
-                finish();
+            PrefUtil.isAuthanticated = false;
+            Intent intent = new Intent(ListActivity.this, ChooseActivity.class);
+            startActivity(intent);
+            finish();
             return true;
         }
 
