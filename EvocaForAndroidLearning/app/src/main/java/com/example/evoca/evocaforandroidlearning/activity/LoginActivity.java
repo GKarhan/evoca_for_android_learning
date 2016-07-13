@@ -8,8 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.Toast;
-
 import com.example.evoca.evocaforandroidlearning.Model.ServerResponse;
 import com.example.evoca.evocaforandroidlearning.R;
 import com.example.evoca.evocaforandroidlearning.api.ApiManager;
@@ -21,16 +19,10 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.HttpMethod;
-import com.facebook.Profile;
-import com.facebook.ProfileTracker;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-
-import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -55,7 +47,6 @@ public class LoginActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_login);
 
         AppEventsLogger.activateApp(this);
-
         FacebookSdk.sdkInitialize(getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
 
@@ -66,16 +57,14 @@ public class LoginActivity extends AppCompatActivity  {
 
     private void checkAuthantication() {
 
+        progressBar.setVisibility(View.GONE);
         if(AccessToken.getCurrentAccessToken() != null){
             PrefUtil.isAuthanticated = true;
             Intent intent = new Intent(LoginActivity.this, ListActivity.class);
             startActivity(intent);
         }
-
-        progressBar.setVisibility(View.VISIBLE);
         String loggedInUserEmail = PrefUtil.getFromPrefs(LoginActivity.this, PrefUtil.PREFS_LOGIN_USERNAME_KEY, "");
         String loggedInUserPassword = PrefUtil.getFromPrefs(LoginActivity.this, PrefUtil.PREFS_LOGIN_PASSWORD_KEY, "");
-
         sendLoginRequest(loggedInUserEmail, loggedInUserPassword);
     }
 
@@ -115,8 +104,6 @@ public class LoginActivity extends AppCompatActivity  {
         fbLoginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-
-
                 GraphRequest request = GraphRequest.newMeRequest(
                         loginResult.getAccessToken(),
                         new GraphRequest.GraphJSONObjectCallback() {
@@ -127,9 +114,7 @@ public class LoginActivity extends AppCompatActivity  {
                         });
 
                 request.executeAsync();
-
                 PrefUtil.isAuthanticated = true;
-
                 System.out.println("++++++++++++++++++ User Id : " + loginResult.getAccessToken().getUserId());
                 Intent intent = new Intent(LoginActivity.this, ListActivity.class);
                 startActivity(intent);
@@ -138,7 +123,6 @@ public class LoginActivity extends AppCompatActivity  {
             @Override
             public void onCancel() {
                 System.out.println("++++++++++++++++++ Cancel");
-
             }
 
             @Override
@@ -188,9 +172,7 @@ public class LoginActivity extends AppCompatActivity  {
                         // Saving user credentials on successful login case
                         PrefUtil.saveToPrefs(LoginActivity.this, PrefUtil.PREFS_LOGIN_USERNAME_KEY, email);
                         PrefUtil.saveToPrefs(LoginActivity.this, PrefUtil.PREFS_LOGIN_PASSWORD_KEY, password);
-                        System.out.println("*****" + serverResponse.getStatus());
                         PrefUtil.isAuthanticated = true;
-
                         Intent intent = new Intent(LoginActivity.this, ListActivity.class);
                         startActivity(intent);
                     } else {

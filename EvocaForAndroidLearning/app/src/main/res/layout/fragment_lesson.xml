@@ -36,8 +36,7 @@
         <ScrollView
             android:layout_marginTop="40dp"
             android:layout_width="match_parent"
-            android:layout_height="450dp">
-
+            android:layout_height="350dp">
             <TextView
                 android:id="@+id/aaaaa"
                 android:layout_width="match_parent"

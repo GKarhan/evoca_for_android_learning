@@ -59,6 +59,10 @@
     <string name="confiramtion_err">Գաղտնաբառը չի համընկնում</string>
     <string name="dialog_connection_title">Ջգուշացում</string>
     <string name="dialog_connection_message">Խնդրում ենք ստուգել միացումը ինտերնետին</string>
+    <string name="exit_dialog_message">Դուրս գալու դեպքում դուք չեք կարող օգտվել վարժություններից</string>
+    <string name="exit_dialog_title">Ջգուշացում</string>
+    <string name="exit_ok">Դուրս գալ</string>
+    <string name="exit_cancel">Մնալ</string>
 
     <!-- facebook_app_id containing the value of your Facebook App ID -->
     <string name="facebook_app_id">141300002962546</string>

@@ -48,7 +48,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     public Child getChild(int groupPosition, int childPosition) {
         /*ArrayList<Child> ch=groups.get(groupPosition).getChildrens();
         return ch.get(childPosition);*/
-        return groups.get(groupPosition).courses.get(childPosition);
+        return groups.get(groupPosition).getCourses().get(childPosition);
     }
     public long getChildId(int groupPosition, int childPosition) {
         return childPosition;
