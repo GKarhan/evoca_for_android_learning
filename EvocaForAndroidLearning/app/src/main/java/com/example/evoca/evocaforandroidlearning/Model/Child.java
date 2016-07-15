@@ -10,7 +10,7 @@ public class Child {
     private String cat_id;
     private String title;
     private String text;
-    private String has_exam;
+    private Integer has_exam;
     private ArrayList<Exercise> exam_questions;
 
     public String getCat_id() {
@@ -37,11 +37,11 @@ public class Child {
         this.text = text;
     }
 
-    public String getHas_exam() {
+    public Integer getHas_exam() {
         return has_exam;
     }
 
-    public void setHas_exam(String has_exam) {
+    public void setHas_exam(Integer has_exam) {
         this.has_exam = has_exam;
     }
 
