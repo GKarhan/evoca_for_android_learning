@@ -45,7 +45,11 @@ public class ListActivity extends AppCompatActivity implements  ExpandableListVi
     ArrayList<Group> groupArrayList =new ArrayList<Group>();
     private MenuItem buttonLogOut;
     private Toolbar toolbar;
-    private Exercise child ;
+
+    ////////////////// by Tatev
+    public static Child lesson;
+    public static int exerciseIndex;
+
     //ArrayList<Child> childrens=new ArrayList<Child>();
 
 
@@ -113,32 +117,35 @@ public class ListActivity extends AppCompatActivity implements  ExpandableListVi
 
 
 //        Toast.makeText(ListActivity.this, "" + childText.getHas_exam(), Toast.LENGTH_SHORT).show();
-        LessonFragment lessonFragment = new LessonFragment();
+        // set Child argument
+        //LessonFragment lessonFragment = new LessonFragment(childText);
+        LessonFragment lessonFragment = LessonFragment.newInstance(childText);
             //Get Fragment Instance
-            Bundle data = new Bundle();//Use bundle to pass data
-            data.putString("data", childText.getText());//put string, int, etc in bundle with a key value
-            data.putString("title", childText.getTitle());
-            data.putInt("exam", childText.getHas_exam());
-            if (childText.getHas_exam() == 1) {
-                child = expandableListAdapter.getChild(groupPosition, childPosition).getExam_questions().get(childPosition);
+            //Bundle data = new Bundle();//Use bundle to pass data
+            //data.putString("data", childText.getText());//put string, int, etc in bundle with a key value
+            //data.putString("title", childText.getTitle());
+            //data.putInt("exam", childText.getHas_exam());
+            //if (childText.getHas_exam() == 1) {
+            //    child = expandableListAdapter.getChild(groupPosition, childPosition).getExam_questions().get(childPosition);
 //                for(Exercise examquestion : childText.getExam_questions()) {
 //                    System.out.println("-----" + examquestion.getType());
 //                    System.out.println("-----"+childText.getText());
 //                }
 //                System.out.println("++++" + childText.getExam_questions().size());
-                data.putString("question", child.getQuestion());
-                data.putString("answer1",child.getAns1());
-                data.putString("answer2",child.getAns2());
-                data.putString("answer3",child.getAns3());
-                data.putString("answer4",child.getAns4());
-                data.putString("tar1",child.getTa1());
-                data.putString("tar2",child.getTa2());
-                data.putString("type", child.getType());
-            } else {
+            //    data.putString("question", child.getQuestion());
+            //    data.putString("answer1",child.getAns1());
+            //    data.putString("answer2",child.getAns2());
+             //   data.putString("answer3",child.getAns3());
+             //   data.putString("answer4",child.getAns4());
+             //   data.putString("tar1",child.getTa1());
+             //   data.putString("tar2",child.getTa2());
+            //    data.putString("type", child.getType());
+           // } else {
 
-            }
-            lessonFragment.setArguments(data);
-            getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.list_frame, lessonFragment).commit();
+           // }
+           // lessonFragment.setArguments(data);
+            //getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.list_frame, lessonFragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.list_frame, lessonFragment).commit();
 
         return true;
     }
@@ -191,6 +198,7 @@ public class ListActivity extends AppCompatActivity implements  ExpandableListVi
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        exerciseIndex = 0;
         finish();
     }
 }
