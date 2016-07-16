@@ -72,6 +72,7 @@ public class LessonFragment extends Fragment {
                 RadioFragment radioFragment = new RadioFragment();
                 EditTextFragment editTextFragment = new EditTextFragment();
 
+
                 String question = getArguments().getString("question");
                 String type = getArguments().getString("type");
                 String answer1 = getArguments().getString("answer1");
@@ -88,10 +89,13 @@ public class LessonFragment extends Fragment {
                 bundle.putString("answer4",answer4);
                 bundle.putString("tar1",tar1);
                 bundle.putString("tar2",tar2);
+
+
                 System.out.println(type);
 
                 switch (type) {
                     case "radio": {
+
                         radioFragment.setArguments(bundle);
                         transaction.replace(R.id.list_frame, radioFragment).commit();
                         break;
@@ -107,16 +111,6 @@ public class LessonFragment extends Fragment {
                         break;
                     }
                 }
-              /*  if (type.equals("radio")) {
-                    radioFragment.setArguments(bundle);
-                    transaction.replace(R.id.list_frame, radioFragment).commit();
-                }else if (type.equals("checkbox")){
-                    checkBoxFragment.setArguments(bundle);
-                    transaction.replace(R.id.list_frame,checkBoxFragment).commit();
-                }else {
-                    editTextFragment.setArguments(bundle);
-                    transaction.replace(R.id.list_frame,editTextFragment).commit();
-                }*/
             }
         });
 

@@ -45,8 +45,9 @@ public class ListActivity extends AppCompatActivity implements  ExpandableListVi
     ArrayList<Group> groupArrayList =new ArrayList<Group>();
     private MenuItem buttonLogOut;
     private Toolbar toolbar;
-    private Exercise child;
+    private Exercise child ;
     //ArrayList<Child> childrens=new ArrayList<Child>();
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,10 +80,12 @@ public class ListActivity extends AppCompatActivity implements  ExpandableListVi
         ApiManager.getInstance().getClient().postContentGroup("testContent", new Callback<List<Group>>() {
             @Override
             public void success(List<Group> groups, Response response) {
+
                 progressBar.setVisibility(View.GONE);
                 groupArrayList.clear();
                 groupArrayList.addAll(groups);
                 expandableListAdapter.notifyDataSetChanged();
+
             }
 
             @Override
@@ -116,9 +119,13 @@ public class ListActivity extends AppCompatActivity implements  ExpandableListVi
             data.putString("data", childText.getText());//put string, int, etc in bundle with a key value
             data.putString("title", childText.getTitle());
             data.putInt("exam", childText.getHas_exam());
-
             if (childText.getHas_exam() == 1) {
                 child = expandableListAdapter.getChild(groupPosition, childPosition).getExam_questions().get(childPosition);
+//                for(Exercise examquestion : childText.getExam_questions()) {
+//                    System.out.println("-----" + examquestion.getType());
+//                    System.out.println("-----"+childText.getText());
+//                }
+//                System.out.println("++++" + childText.getExam_questions().size());
                 data.putString("question", child.getQuestion());
                 data.putString("answer1",child.getAns1());
                 data.putString("answer2",child.getAns2());
