@@ -1,13 +1,23 @@
 package com.example.evoca.evocaforandroidlearning.fragments;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.renderscript.Type;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,10 +38,11 @@ public class RadioFragment extends Fragment implements View.OnClickListener {
     private RadioButton textViewRadioAnswer3;
     private RadioButton textViewRadioAnswer4;
     private String tarberak1;
+    private ImageButton buttonAnswer;
+    private TextView textViewAnswer;
     private boolean correctAnswer = false;
     private Button checkButton;
     private static Exercise exercise;
-    //ArrayList<Exercise> list = new ArrayList<>();
 
 
     public RadioFragment() {
@@ -63,6 +74,9 @@ public class RadioFragment extends Fragment implements View.OnClickListener {
         textViewRadioAnswer2 = (RadioButton) rootView.findViewById(R.id.tv_radio_answer2);
         textViewRadioAnswer3 = (RadioButton) rootView.findViewById(R.id.tv_radio_answer3);
         textViewRadioAnswer4 = (RadioButton) rootView.findViewById(R.id.tv_radio_answer4);
+
+        buttonAnswer = (ImageButton) rootView.findViewById(R.id.btn_answer);
+        textViewAnswer = (TextView) rootView.findViewById(R.id.tv_answer);
         checkButton = (Button) rootView.findViewById(R.id.btn_radio_check);
 
         /*String question = getArguments().getString("question");
@@ -92,15 +106,35 @@ public class RadioFragment extends Fragment implements View.OnClickListener {
         textViewRadioAnswer3.setOnClickListener(this);
         textViewRadioAnswer4.setOnClickListener(this);
 
+      buttonAnswer.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              FragmentTransaction transaction = getFragmentManager().beginTransaction();
+              if (correctAnswer) {
+                  Toast.makeText(getContext(), "Հալալ ա Քեզ", Toast.LENGTH_SHORT).show();
+                  getNextExercise();
+              }
+              else {
+                  Toast.makeText(getContext(), "Սխալ պատասխան, փորձիր կրկին պատասխանել:", Toast.LENGTH_SHORT).show();
+                  LessonFragment lessonFragment = LessonFragment.newInstance(ListActivity.lesson);
+                  transaction.replace(R.id.list_frame, lessonFragment).commit();
+
+              }
+          }
+      });
         checkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (correctAnswer) {
-                    Toast.makeText(getContext(), "Հալալ ա Քեզ", Toast.LENGTH_SHORT).show();
-                    getNextExercise();
-                }
-                else {
-                    Toast.makeText(getContext(), "Սխալ պատասխան, փորձիր կրկին պատասխանել:", Toast.LENGTH_SHORT).show();
+                if (correctAnswer){
+                    textViewAnswer.setText(getResources().getString(R.string.correct_answer));
+                    textViewAnswer.setVisibility(View.VISIBLE);
+                    buttonAnswer.setImageResource(R.drawable.correct);
+                    buttonAnswer.setVisibility(View.VISIBLE);
+                }else {
+                    textViewAnswer.setText(getResources().getString(R.string.incorrect_answer));
+                    textViewAnswer.setVisibility(View.VISIBLE);
+                    buttonAnswer.setImageResource(R.drawable.incorrect);
+                    buttonAnswer.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -170,7 +204,25 @@ public class RadioFragment extends Fragment implements View.OnClickListener {
             }
         } else {
             //((ListActivity)getActivity()).onBackPressed();
-            transaction.replace(R.id.list_frame, LessonFragment.newInstance(ListActivity.lesson)).commit();
+            ListActivity.exerciseIndex = 0;
+           // transaction.replace(R.id.list_frame, LessonFragment.newInstance(ListActivity.lesson)).commit();
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("   ").setMessage("Դուք հաջողությամբ ավարտեցիք ․․․․․․․․․․․․․․")
+                    .setIcon(R.drawable.congratulations)
+                    .setCancelable(false)
+                    .setNegativeButton("Շարունակել", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent i = new Intent(getContext(), ListActivity.class);
+                            startActivity(i);
+                            getActivity().finish();
+
+                        }
+                    });
+
+            AlertDialog alert = builder.create();
+            alert.show();
+
         }
 
     }

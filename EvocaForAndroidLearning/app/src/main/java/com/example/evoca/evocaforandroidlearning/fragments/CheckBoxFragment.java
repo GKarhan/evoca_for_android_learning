@@ -1,20 +1,30 @@
 package com.example.evoca.evocaforandroidlearning.fragments;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.evoca.evocaforandroidlearning.Model.Child;
 import com.example.evoca.evocaforandroidlearning.Model.Exercise;
 import com.example.evoca.evocaforandroidlearning.R;
+import com.example.evoca.evocaforandroidlearning.activity.ChooseActivity;
 import com.example.evoca.evocaforandroidlearning.activity.ListActivity;
+import com.example.evoca.evocaforandroidlearning.util.PrefUtil;
+import com.facebook.AccessToken;
+import com.facebook.login.LoginManager;
 
 
 public class CheckBoxFragment extends Fragment implements View.OnClickListener {
@@ -25,6 +35,9 @@ public class CheckBoxFragment extends Fragment implements View.OnClickListener {
     private CheckBox checkBoxAnswer3;
     private CheckBox checkBoxAnswer4;
     private Button buttonCheck;
+    private ImageButton buttonAnswer;
+    private TextView textViewAnswer;
+
     private static Exercise exercise;
 
 
@@ -57,6 +70,7 @@ public class CheckBoxFragment extends Fragment implements View.OnClickListener {
         checkBoxAnswer2 = (CheckBox) rootView.findViewById(R.id.cb_check_box_answer2);
         checkBoxAnswer3 = (CheckBox) rootView.findViewById(R.id.cb_check_box_answer3);
         checkBoxAnswer4 = (CheckBox) rootView.findViewById(R.id.cb_check_box_answer4);
+
         buttonCheck = (Button) rootView.findViewById(R.id.btn_chack);
 
         /*String question = getArguments().getString("question");
@@ -82,10 +96,10 @@ public class CheckBoxFragment extends Fragment implements View.OnClickListener {
         checkBoxAnswer3.setOnClickListener(this);
         checkBoxAnswer4.setOnClickListener(this);
 
+
         buttonCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 getNextExercise();
             }
         });
@@ -164,8 +178,23 @@ public class CheckBoxFragment extends Fragment implements View.OnClickListener {
         } else {
             //((ListActivity)getActivity()).onBackPressed();
             //getFragmentManager().popBackStack();
-            transaction.replace(R.id.list_frame, LessonFragment.newInstance(ListActivity.lesson)).commit();
-        }
+            ListActivity.exerciseIndex = 0;
+            //transaction.replace(R.id.list_frame, LessonFragment.newInstance(ListActivity.lesson)).commit();
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("   ").setMessage("Դուք հաջողությամբ ավարտեցիք ․․․․․․․․․․․․․․")
+                    .setIcon(R.drawable.congratulations)
+                    .setCancelable(false)
+                    .setNegativeButton("Շարունակել", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent i = new Intent(getContext(), ListActivity.class);
+                            startActivity(i);
+                            getActivity().finish();
+                        }
+                    });
 
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
     }
 }

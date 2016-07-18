@@ -1,15 +1,20 @@
 package com.example.evoca.evocaforandroidlearning.fragments;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,7 +58,7 @@ public class EditTextFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_edit_text, container, false);
         textViewQuestion = (TextView) rootView.findViewById(R.id.tv_edit_question);
-        etAnswer = (EditText) rootView.findViewById(R.id.et_edit_answer);
+        //etAnswer = (EditText) rootView.findViewById(R.id.et_edit_answer);
         checkButton = (Button) rootView.findViewById(R.id.btn_chack);
 
         /*String question = getArguments().getString("question");
@@ -81,8 +86,6 @@ public class EditTextFragment extends Fragment implements View.OnClickListener {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         if(ListActivity.exerciseIndex < ListActivity.lesson.getExam_questions().size()) {
             Child lesson = ListActivity.lesson;
-
-
             switch (lesson.getExam_questions().get(ListActivity.exerciseIndex).getType()) {
                 case "radio": {
                     RadioFragment radioFragment = RadioFragment.newInstance();
@@ -102,18 +105,35 @@ public class EditTextFragment extends Fragment implements View.OnClickListener {
             }
         } else {
             //((ListActivity)getActivity()).onBackPressed();
-            transaction.replace(R.id.list_frame, LessonFragment.newInstance(ListActivity.lesson)).commit();
+            ListActivity.exerciseIndex = 0;
+            //transaction.replace(R.id.list_frame, LessonFragment.newInstance(ListActivity.lesson)).commit();
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("   ").setMessage("Դուք հաջողությամբ ավարտեցիք ․․․․․․․․․․․․․․")
+                    .setIcon(R.drawable.congratulations)
+                    .setCancelable(false)
+                    .setNegativeButton("Շարունակել", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent i = new Intent(getContext(), ListActivity.class);
+                            startActivity(i);
+                            getActivity().finish();
+                        }
+                    });
+
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
         }
 
-    }
+
 
     @Override
     public void onClick(View v) {
 
         switch (v.getId()){
-            case R.id.et_edit_answer:
-            System.out.println("jjj++++++++++++++++++++++++++++");
-            break;
+            //case R.id.et_edit_answer:
+          //  System.out.println("jjj++++++++++++++++++++++++++++");
+           // break;
         }
 
     }

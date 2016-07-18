@@ -29,10 +29,8 @@ public class LessonFragment extends Fragment {
 
     public static LessonFragment newInstance(Child lesson) {
         LessonFragment fragment = new LessonFragment();
-
         ListActivity.lesson = lesson;
-        LessonFragment.lesson = lesson;
-
+        LessonFragment.lesson = lesson;///????????????
         Bundle args = new Bundle();
         return fragment;
     }
@@ -41,7 +39,6 @@ public class LessonFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -67,7 +64,9 @@ public class LessonFragment extends Fragment {
             exerciseButton.setEnabled(false);
         } else if(ListActivity.exerciseIndex >= lesson.getExam_questions().size()){
             exerciseButton.setText("Ստուգումն ավարտված է");
-            exerciseButton.setEnabled(false);
+            //exerciseButton.setEnabled(false);
+            ListActivity.exerciseIndex = 0;
+
         }
 
         /*String getArgument = getArguments().getString("data");

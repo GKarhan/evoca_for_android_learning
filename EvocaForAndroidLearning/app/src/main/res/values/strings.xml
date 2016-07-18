@@ -63,6 +63,8 @@
     <string name="exit_dialog_title">Ջգուշացում</string>
     <string name="exit_ok">Դուրս գալ</string>
     <string name="exit_cancel">Մնալ</string>
+    <string name="correct_answer">Ձեր պատասխանը ճիշտ է</string>
+    <string name="incorrect_answer">Ձեր պատասխանը սխալ է</string>
 
     <!-- facebook_app_id containing the value of your Facebook App ID -->
     <string name="facebook_app_id">141300002962546</string>

@@ -120,6 +120,7 @@ public class ListActivity extends AppCompatActivity implements  ExpandableListVi
         // set Child argument
         //LessonFragment lessonFragment = new LessonFragment(childText);
         LessonFragment lessonFragment = LessonFragment.newInstance(childText);
+
             //Get Fragment Instance
             //Bundle data = new Bundle();//Use bundle to pass data
             //data.putString("data", childText.getText());//put string, int, etc in bundle with a key value

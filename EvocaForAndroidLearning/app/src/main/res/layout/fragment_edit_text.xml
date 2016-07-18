@@ -81,12 +81,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <EditText
-                android:id="@+id/et_edit_answer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Your answer"
-                android:editable="true"/>
+            <!--<EditText-->
+                <!--android:id="@+id/et_edit_answer"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:hint="Your answer"-->
+                <!--android:editable="true"/>-->
         </LinearLayout>
 
         <Button
