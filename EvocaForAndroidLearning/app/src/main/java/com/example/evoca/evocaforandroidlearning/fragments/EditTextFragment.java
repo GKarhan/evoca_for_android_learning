@@ -33,6 +33,7 @@ public class EditTextFragment extends Fragment implements View.OnClickListener {
     private Button checkButton;
     private boolean correctAnswer = false;
     private static Exercise exercise;
+    private EditText ed;
 
     public EditTextFragment() {
         // Required empty public constructor
@@ -58,6 +59,7 @@ public class EditTextFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_edit_text, container, false);
         textViewQuestion = (TextView) rootView.findViewById(R.id.tv_edit_question);
+        ed = (EditText) rootView.findViewById(R.id.et_text);
         //etAnswer = (EditText) rootView.findViewById(R.id.et_edit_answer);
         checkButton = (Button) rootView.findViewById(R.id.btn_chack);
 

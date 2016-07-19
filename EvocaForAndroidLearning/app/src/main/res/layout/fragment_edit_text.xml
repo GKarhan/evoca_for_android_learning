@@ -52,7 +52,6 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
-
             <TextView
                 android:id="@+id/tv_edit_question"
                 android:text="Loren ipsum is _____ dummy text of the printing and typesetting indusstry"
@@ -80,6 +79,12 @@
                 android:id="@+id/tv_edit_answer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+            <EditText
+                android:hint="answer"
+                android:id="@+id/et_text"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content" />
+
 
             <!--<EditText-->
                 <!--android:id="@+id/et_edit_answer"-->
@@ -88,6 +93,7 @@
                 <!--android:hint="Your answer"-->
                 <!--android:editable="true"/>-->
         </LinearLayout>
+
 
         <Button
             android:id="@+id/btn_chack"

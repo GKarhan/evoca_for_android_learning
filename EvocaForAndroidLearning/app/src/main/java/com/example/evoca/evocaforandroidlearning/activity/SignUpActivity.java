@@ -54,8 +54,8 @@ public class SignUpActivity extends AppCompatActivity {
                 String email = editTextSignUpEmail.getText().toString();
                 String password = editTextSignUpPass.getText().toString();
 
-                if (validation() && emailValidation() && confirmValidation()) {
 
+                if (validation() && emailValidation() && confirmValidation()) {
                     ApiManager.getInstance().getClient().postRegistrationData(email, password, firstName, lastName, new Callback<ServerResponse>() {
                         @Override
                         public void success(ServerResponse serverResponse, Response response) {
@@ -69,7 +69,6 @@ public class SignUpActivity extends AppCompatActivity {
                                 editTextSignUpEmail.requestFocus();
                             }
                         }
-
                         @Override
                         public void failure(RetrofitError error) {
                             progressBar.setVisibility(View.GONE);

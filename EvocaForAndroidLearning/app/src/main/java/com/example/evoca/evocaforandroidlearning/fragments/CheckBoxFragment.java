@@ -34,18 +34,19 @@ public class CheckBoxFragment extends Fragment implements View.OnClickListener {
     private CheckBox checkBoxAnswer2;
     private CheckBox checkBoxAnswer3;
     private CheckBox checkBoxAnswer4;
+    private boolean correctAnswer = false;
+    private Integer count = 0;
     private Button buttonCheck;
     private ImageButton buttonAnswer;
     private TextView textViewAnswer;
 
     private static Exercise exercise;
-
+    private boolean checked;
 
 
     public CheckBoxFragment() {
         // Required empty public constructor
     }
-
 
     public static CheckBoxFragment newInstance() {
         CheckBoxFragment fragment = new CheckBoxFragment();
@@ -71,19 +72,11 @@ public class CheckBoxFragment extends Fragment implements View.OnClickListener {
         checkBoxAnswer3 = (CheckBox) rootView.findViewById(R.id.cb_check_box_answer3);
         checkBoxAnswer4 = (CheckBox) rootView.findViewById(R.id.cb_check_box_answer4);
 
+        buttonAnswer = (ImageButton) rootView.findViewById(R.id.btn_answer);
+        textViewAnswer = (TextView) rootView.findViewById(R.id.tv_answer);
+
         buttonCheck = (Button) rootView.findViewById(R.id.btn_chack);
 
-        /*String question = getArguments().getString("question");
-        final String answer1 = getArguments().getString("answer1");
-        String answer2 = getArguments().getString("answer2");
-        String answer3 = getArguments().getString("answer3");
-        String answer4 = getArguments().getString("answer4");
-
-        textViewQuestion.setText(question);
-        checkBoxAnswer1.setText(answer1);
-        checkBoxAnswer2.setText(answer2);
-        checkBoxAnswer3.setText(answer3);
-        checkBoxAnswer4.setText(answer4);*/
 
         textViewQuestion.setText(exercise.getQuestion());
         checkBoxAnswer1.setText(exercise.getAns1());
@@ -91,57 +84,112 @@ public class CheckBoxFragment extends Fragment implements View.OnClickListener {
         checkBoxAnswer3.setText(exercise.getAns3());
         checkBoxAnswer4.setText(exercise.getAns4());
 
+
         checkBoxAnswer1.setOnClickListener(this);
         checkBoxAnswer2.setOnClickListener(this);
         checkBoxAnswer3.setOnClickListener(this);
         checkBoxAnswer4.setOnClickListener(this);
 
 
+        buttonAnswer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                if (correctAnswer) {
+                    Toast.makeText(getContext(), "Հալալ ա Քեզ", Toast.LENGTH_SHORT).show();
+                    getNextExercise();
+                }
+                else {
+                    Toast.makeText(getContext(), "Սխալ պատասխան, փորձիր կրկին պատասխանել:", Toast.LENGTH_SHORT).show();
+                    LessonFragment lessonFragment = LessonFragment.newInstance(ListActivity.lesson);
+                    transaction.replace(R.id.list_frame, lessonFragment).commit();
+
+                }
+            }
+        });
+
+
         buttonCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getNextExercise();
+                if (correctAnswer && count == 2  ){
+                    textViewAnswer.setText(getResources().getString(R.string.correct_answer));
+                    textViewAnswer.setVisibility(View.VISIBLE);
+                    buttonAnswer.setImageResource(R.drawable.correct);
+                    buttonAnswer.setVisibility(View.VISIBLE);
+                    System.out.println(correctAnswer);
+                }else if (correctAnswer && count == 3){
+                    textViewAnswer.setText(getResources().getString(R.string.correct_answer));
+                    textViewAnswer.setVisibility(View.VISIBLE);
+                    buttonAnswer.setImageResource(R.drawable.correct);
+                    buttonAnswer.setVisibility(View.VISIBLE);
+                    System.out.println(correctAnswer);
+                }else {
+                    textViewAnswer.setText(getResources().getString(R.string.incorrect_answer));
+                    textViewAnswer.setVisibility(View.VISIBLE);
+                    buttonAnswer.setImageResource(R.drawable.incorrect);
+                    buttonAnswer.setVisibility(View.VISIBLE);
+                    count = 0;
+                    checkBoxAnswer1.setChecked(false);
+                    checkBoxAnswer2.setChecked(false);
+                    checkBoxAnswer3.setChecked(false);
+                    checkBoxAnswer4.setChecked(false);
+                }
             }
         });
         return rootView;
+
+
     }
 
 
     @Override
     public void onClick(View v) {
-        boolean checked = ((CheckBox) v).isChecked();
-
-        /*String tar1  = getArguments().getString("tar1");
-        String tar2  = getArguments().getString("tar2");*/
-
+        checked = ((CheckBox) v).isChecked();
         String tar1  = exercise.getTa1();
         String tar2  = exercise.getTa2();
-
+        String tar3 = exercise.getTa3();
         System.out.println(""+tar1);
         System.out.println(""+tar2);
+        System.out.println(""+tar3);
         switch (v.getId()) {
-
             case R.id.cb_check_box_answer1: {
-                if (checked && (checkBoxAnswer1.getText().equals(tar1) || checkBoxAnswer1.getText().equals(tar2))) {
-
+                if (checked && (checkBoxAnswer1.getText().equals(tar1) || checkBoxAnswer1.getText().equals(tar2) || checkBoxAnswer1.getText().equals(tar3))) {
+                    correctAnswer = true;
+                    count++;
+                }else {
+                    correctAnswer = false;
+                    count = 0;
                 }
                 break;
             }
             case R.id.cb_check_box_answer2: {
-                if (checked && (checkBoxAnswer2.getText().equals(tar1) || checkBoxAnswer2.getText().equals(tar2))) {
-                    Toast.makeText(getContext(), "" +checkBoxAnswer1.getText(), Toast.LENGTH_SHORT).show();
+                if (checked && (checkBoxAnswer2.getText().equals(tar1) || checkBoxAnswer2.getText().equals(tar2)|| checkBoxAnswer2.getText().equals(tar3))) {
+                    correctAnswer = true;
+                    count++;
+                }else {
+                    correctAnswer = false;
+                    count = 0;
                 }
                 break;
             }
             case R.id.cb_check_box_answer3: {
-                if (checked && (checkBoxAnswer3.getText().equals(tar1) || checkBoxAnswer3.getText().equals(tar2))) {
-                    Toast.makeText(getContext(), "" +checkBoxAnswer1.getText(), Toast.LENGTH_SHORT).show();
+                if (checked && (checkBoxAnswer3.getText().equals(tar1) || checkBoxAnswer3.getText().equals(tar2)|| checkBoxAnswer3.getText().equals(tar3))) {
+                    correctAnswer = true;
+                    count++;
+                }else {
+                    correctAnswer = false;
+                    count = 0;
                 }
                 break;
             }
             case R.id.cb_check_box_answer4: {
-                if (checked && (checkBoxAnswer4.getText().equals(tar1) || checkBoxAnswer4.getText().equals(tar2))) {
-                    Toast.makeText(getContext(), "" +checkBoxAnswer4.getText(), Toast.LENGTH_SHORT).show();
+                if (checked && (checkBoxAnswer4.getText().equals(tar1) || checkBoxAnswer4.getText().equals(tar2)|| checkBoxAnswer4.getText().equals(tar3))) {
+                    correctAnswer = true;
+                    count++;
+                }else {
+                    correctAnswer = false;
+                    count = 0;
                 }
                 break;
             }

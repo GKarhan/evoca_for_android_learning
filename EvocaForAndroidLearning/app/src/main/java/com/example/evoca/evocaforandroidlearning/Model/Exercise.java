@@ -11,6 +11,7 @@ public class Exercise {
     private String ans4;
     private String ta1;
     private String ta2;
+    private String ta3;
 
     public String getCourse_id() {
         return course_id;
@@ -82,5 +83,13 @@ public class Exercise {
 
     public void setTa2(String ta2) {
         this.ta2 = ta2;
+    }
+
+    public String getTa3() {
+        return ta3;
+    }
+
+    public void setTa3(String ta3) {
+        this.ta3 = ta3;
     }
 }
