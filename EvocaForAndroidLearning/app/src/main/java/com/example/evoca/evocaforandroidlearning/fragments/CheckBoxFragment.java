@@ -26,6 +26,8 @@ import com.example.evoca.evocaforandroidlearning.util.PrefUtil;
 import com.facebook.AccessToken;
 import com.facebook.login.LoginManager;
 
+import java.util.ArrayList;
+
 
 public class CheckBoxFragment extends Fragment implements View.OnClickListener {
 
@@ -34,14 +36,19 @@ public class CheckBoxFragment extends Fragment implements View.OnClickListener {
     private CheckBox checkBoxAnswer2;
     private CheckBox checkBoxAnswer3;
     private CheckBox checkBoxAnswer4;
-    private boolean correctAnswer = false;
-    private Integer count = 0;
+    private boolean correctAnswer = true;
+
     private Button buttonCheck;
     private ImageButton buttonAnswer;
     private TextView textViewAnswer;
 
     private static Exercise exercise;
-    private boolean checked;
+    private String tar1;
+    private String tar2;
+    private String tar3;
+    private Integer answersCount = 0;
+
+    //private boolean checked;
 
 
     public CheckBoxFragment() {
@@ -50,7 +57,7 @@ public class CheckBoxFragment extends Fragment implements View.OnClickListener {
 
     public static CheckBoxFragment newInstance() {
         CheckBoxFragment fragment = new CheckBoxFragment();
-        Bundle args = new Bundle();
+        //Bundle args = new Bundle();
         exercise = ListActivity.lesson.getExam_questions().get(ListActivity.exerciseIndex);
         return fragment;
     }
@@ -84,12 +91,25 @@ public class CheckBoxFragment extends Fragment implements View.OnClickListener {
         checkBoxAnswer3.setText(exercise.getAns3());
         checkBoxAnswer4.setText(exercise.getAns4());
 
+        tar1  = exercise.getTa1();
+        tar2  = exercise.getTa2();
+        tar3 = exercise.getTa3();
 
-        checkBoxAnswer1.setOnClickListener(this);
+        if(!tar1.equals("")) answersCount++;
+        if(!tar2.equals("")) answersCount++;
+        if(!tar3.equals("")) answersCount++;
+
+        System.out.println("----------------------"+tar1);
+        System.out.println("----------------------"+tar2);
+        System.out.println("----------------------"+tar3);
+        System.out.println("----------------------"+answersCount);
+
+
+       /* checkBoxAnswer1.setOnClickListener(this);
         checkBoxAnswer2.setOnClickListener(this);
         checkBoxAnswer3.setOnClickListener(this);
         checkBoxAnswer4.setOnClickListener(this);
-
+*/
 
         buttonAnswer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,19 +132,40 @@ public class CheckBoxFragment extends Fragment implements View.OnClickListener {
         buttonCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (correctAnswer && count == 2  ){
+
+                checkAnswer();
+
+                if (correctAnswer){
                     textViewAnswer.setText(getResources().getString(R.string.correct_answer));
                     textViewAnswer.setVisibility(View.VISIBLE);
                     buttonAnswer.setImageResource(R.drawable.correct);
                     buttonAnswer.setVisibility(View.VISIBLE);
                     System.out.println(correctAnswer);
-                }else if (correctAnswer && count == 3){
+                } else {
+                    textViewAnswer.setText(getResources().getString(R.string.incorrect_answer));
+                    textViewAnswer.setVisibility(View.VISIBLE);
+                    buttonAnswer.setImageResource(R.drawable.incorrect);
+                    buttonAnswer.setVisibility(View.VISIBLE);
+                    //count = 0;
+                    checkBoxAnswer1.setChecked(false);
+                    checkBoxAnswer2.setChecked(false);
+                    checkBoxAnswer3.setChecked(false);
+                    checkBoxAnswer4.setChecked(false);
+                }
+
+                /*if (correctAnswer && count == 2  ){
                     textViewAnswer.setText(getResources().getString(R.string.correct_answer));
                     textViewAnswer.setVisibility(View.VISIBLE);
                     buttonAnswer.setImageResource(R.drawable.correct);
                     buttonAnswer.setVisibility(View.VISIBLE);
                     System.out.println(correctAnswer);
-                }else {
+                } else if (correctAnswer && count == 3){
+                    textViewAnswer.setText(getResources().getString(R.string.correct_answer));
+                    textViewAnswer.setVisibility(View.VISIBLE);
+                    buttonAnswer.setImageResource(R.drawable.correct);
+                    buttonAnswer.setVisibility(View.VISIBLE);
+                    System.out.println(correctAnswer);
+                } else {
                     textViewAnswer.setText(getResources().getString(R.string.incorrect_answer));
                     textViewAnswer.setVisibility(View.VISIBLE);
                     buttonAnswer.setImageResource(R.drawable.incorrect);
@@ -134,18 +175,18 @@ public class CheckBoxFragment extends Fragment implements View.OnClickListener {
                     checkBoxAnswer2.setChecked(false);
                     checkBoxAnswer3.setChecked(false);
                     checkBoxAnswer4.setChecked(false);
-                }
+                }*/
+
             }
         });
+
         return rootView;
-
-
     }
 
 
     @Override
     public void onClick(View v) {
-        checked = ((CheckBox) v).isChecked();
+       /* checked = ((CheckBox) v).isChecked();
         String tar1  = exercise.getTa1();
         String tar2  = exercise.getTa2();
         String tar3 = exercise.getTa3();
@@ -194,10 +235,43 @@ public class CheckBoxFragment extends Fragment implements View.OnClickListener {
                 break;
             }
 
+        }*/
+    }
+
+    private void checkAnswer() {
+
+        ArrayList<String> userAnswers = new ArrayList<String>();
+        int userAnswersCount = 0;
+        correctAnswer = true;
+        if(checkBoxAnswer1.isChecked()) {
+            userAnswers.add(checkBoxAnswer1.getText().toString());
+            userAnswersCount++;
+        }
+        if(checkBoxAnswer2.isChecked()) {
+            userAnswers.add(checkBoxAnswer2.getText().toString());
+            userAnswersCount++;
+        }
+        if(checkBoxAnswer3.isChecked()) {
+            userAnswers.add(checkBoxAnswer3.getText().toString());
+            userAnswersCount++;
+        }
+        if(checkBoxAnswer4.isChecked()) {
+            userAnswers.add(checkBoxAnswer4.getText().toString());
+            userAnswersCount++;
         }
 
+        for (String answer : userAnswers) {
+            if(!answer.equals(tar1) && !answer.equals(tar2) && !answer.equals(tar3)) {
+                correctAnswer = false;
+                break;
+            }
+        }
 
+        if(userAnswersCount != answersCount) {
+            correctAnswer = false;
+        }
     }
+
 
     private void getNextExercise(){
         ListActivity.exerciseIndex++;

@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -33,7 +34,7 @@ public class ListActivity extends AppCompatActivity implements  ExpandableListVi
 
     private ProgressBar progressBar;
     private TextView textView;
-
+    private LinearLayout lessonsList;
 
     /*our expandable adapter */
     ExpandableListAdapter expandableListAdapter;
@@ -50,9 +51,6 @@ public class ListActivity extends AppCompatActivity implements  ExpandableListVi
     public static Child lesson;
     public static int exerciseIndex;
 
-    //ArrayList<Child> childrens=new ArrayList<Child>();
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,18 +61,17 @@ public class ListActivity extends AppCompatActivity implements  ExpandableListVi
         textView = (TextView) findViewById(R.id.aaaaa);
 
 
-     /*genarate data for list view*/
+        /*genarate data for list view*/
         genarateData();
 
-     /*instantiate adapter with our item list*/
+        /*instantiate adapter with our item list*/
         expandableListAdapter=new ExpandableListAdapter(this, groupArrayList);
 
-     /*we get list view*/
+        /*we get list view*/
         expandableListView=(ExpandableListView) findViewById(R.id.expandableListView);
 
         /*set adapter to list view*/
         expandableListView.setAdapter(expandableListAdapter);
-
         expandableListView.setOnChildClickListener(this);
 
     }
@@ -89,7 +86,6 @@ public class ListActivity extends AppCompatActivity implements  ExpandableListVi
                 groupArrayList.clear();
                 groupArrayList.addAll(groups);
                 expandableListAdapter.notifyDataSetChanged();
-
             }
 
             @Override
@@ -101,7 +97,7 @@ public class ListActivity extends AppCompatActivity implements  ExpandableListVi
 
     @Override
     public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-      //  buttonBack.setVisible(true);
+
         toolbar.setNavigationIcon(R.drawable.back);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,38 +111,11 @@ public class ListActivity extends AppCompatActivity implements  ExpandableListVi
         expandableListView.removeAllViewsInLayout();
         Child childText =  expandableListAdapter.getChild(groupPosition, childPosition);
 
-
-//        Toast.makeText(ListActivity.this, "" + childText.getHas_exam(), Toast.LENGTH_SHORT).show();
-        // set Child argument
-        //LessonFragment lessonFragment = new LessonFragment(childText);
         LessonFragment lessonFragment = LessonFragment.newInstance(childText);
 
-            //Get Fragment Instance
-            //Bundle data = new Bundle();//Use bundle to pass data
-            //data.putString("data", childText.getText());//put string, int, etc in bundle with a key value
-            //data.putString("title", childText.getTitle());
-            //data.putInt("exam", childText.getHas_exam());
-            //if (childText.getHas_exam() == 1) {
-            //    child = expandableListAdapter.getChild(groupPosition, childPosition).getExam_questions().get(childPosition);
-//                for(Exercise examquestion : childText.getExam_questions()) {
-//                    System.out.println("-----" + examquestion.getType());
-//                    System.out.println("-----"+childText.getText());
-//                }
-//                System.out.println("++++" + childText.getExam_questions().size());
-            //    data.putString("question", child.getQuestion());
-            //    data.putString("answer1",child.getAns1());
-            //    data.putString("answer2",child.getAns2());
-             //   data.putString("answer3",child.getAns3());
-             //   data.putString("answer4",child.getAns4());
-             //   data.putString("tar1",child.getTa1());
-             //   data.putString("tar2",child.getTa2());
-            //    data.putString("type", child.getType());
-           // } else {
-
-           // }
-           // lessonFragment.setArguments(data);
-            //getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.list_frame, lessonFragment).commit();
-            getSupportFragmentManager().beginTransaction().replace(R.id.list_frame, lessonFragment).commit();
+        lessonsList = (LinearLayout) findViewById(R.id.lesson_list_layout);
+        lessonsList.setVisibility(View.INVISIBLE);
+        getSupportFragmentManager().beginTransaction().replace(R.id.list_frame, lessonFragment).commit();
 
         return true;
     }

@@ -39,6 +39,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/lesson_list_layout"
             android:paddingRight="25dp"
             android:paddingLeft="25dp"
             android:paddingBottom="25dp"
