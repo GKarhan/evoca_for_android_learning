@@ -30,7 +30,7 @@ public class LessonFragment extends Fragment {
     public static LessonFragment newInstance(Child lesson) {
         LessonFragment fragment = new LessonFragment();
         ListActivity.lesson = lesson;
-        LessonFragment.lesson = lesson;///????????????
+        LessonFragment.lesson = lesson;
         return fragment;
     }
 
@@ -65,9 +65,11 @@ public class LessonFragment extends Fragment {
         if(!PrefUtil.isAuthanticated) {
             exerciseButton.setVisibility(View.GONE);
         }
-        
+
+
         exerciseButton.setOnClickListener(new View.OnClickListener() {
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
 
             @Override
             public void onClick(View v) {

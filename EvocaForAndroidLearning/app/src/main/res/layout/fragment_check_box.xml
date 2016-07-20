@@ -28,6 +28,7 @@
             android:layout_weight="1">
 
             <TextView
+                android:id="@+id/tv_title"
                 android:gravity="center|bottom"
                 android:text="Exercise1"
                 android:textSize="20sp"

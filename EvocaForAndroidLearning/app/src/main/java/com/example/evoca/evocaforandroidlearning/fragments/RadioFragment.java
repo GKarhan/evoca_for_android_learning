@@ -43,6 +43,7 @@ public class RadioFragment extends Fragment implements View.OnClickListener {
     private boolean correctAnswer = false;
     private Button checkButton;
     private static Exercise exercise;
+    private TextView textViewTitle;
 
 
     public RadioFragment() {
@@ -74,25 +75,14 @@ public class RadioFragment extends Fragment implements View.OnClickListener {
         textViewRadioAnswer2 = (RadioButton) rootView.findViewById(R.id.tv_radio_answer2);
         textViewRadioAnswer3 = (RadioButton) rootView.findViewById(R.id.tv_radio_answer3);
         textViewRadioAnswer4 = (RadioButton) rootView.findViewById(R.id.tv_radio_answer4);
+        textViewTitle = (TextView) rootView.findViewById(R.id.tv_title);
 
         buttonAnswer = (ImageButton) rootView.findViewById(R.id.btn_answer);
         textViewAnswer = (TextView) rootView.findViewById(R.id.tv_answer);
         checkButton = (Button) rootView.findViewById(R.id.btn_radio_check);
 
-        /*String question = getArguments().getString("question");
-        String answer1 = getArguments().getString("answer1");
-        String answer2 = getArguments().getString("answer2");
-        String answer3 = getArguments().getString("answer3");
-        String answer4 = getArguments().getString("answer4");
 
-        tarberak1 = getArguments().getString("tar1");
-
-        textViewQuestion.setText(question);
-        textViewRadioAnswer1.setText(answer1);
-        textViewRadioAnswer2.setText(answer2);
-        textViewRadioAnswer3.setText(answer3);
-        textViewRadioAnswer4.setText(answer4);
-        System.out.println("***" + question);*/
+        textViewTitle.setText(ListActivity.lesson.getTitle());
 
         textViewQuestion.setText(exercise.getQuestion());
         textViewRadioAnswer1.setText(exercise.getAns1());
@@ -107,19 +97,19 @@ public class RadioFragment extends Fragment implements View.OnClickListener {
         textViewRadioAnswer4.setOnClickListener(this);
 
       buttonAnswer.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-              FragmentTransaction transaction = getFragmentManager().beginTransaction();
-              if (correctAnswer) {
-                  Toast.makeText(getContext(), "Հալալ ա Քեզ", Toast.LENGTH_SHORT).show();
-                  getNextExercise();
-              }
-              else {
-                  Toast.makeText(getContext(), "Սխալ պատասխան, փորձիր կրկին պատասխանել:", Toast.LENGTH_SHORT).show();
-                  LessonFragment lessonFragment = LessonFragment.newInstance(ListActivity.lesson);
-                  transaction.replace(R.id.list_frame, lessonFragment).commit();
+                  @Override
+                  public void onClick(View v) {
+                      FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                      if (correctAnswer) {
+                          Toast.makeText(getContext(), "Հալալ ա Քեզ", Toast.LENGTH_SHORT).show();
+                          getNextExercise();
+                      }
+                      else {
+                          Toast.makeText(getContext(), "Սխալ պատասխան, փորձիր կրկին պատասխանել:", Toast.LENGTH_SHORT).show();
+                          LessonFragment lessonFragment = LessonFragment.newInstance(ListActivity.lesson);
+                          transaction.replace(R.id.list_frame, lessonFragment).commit();
 
-              }
+                      }
           }
       });
         checkButton.setOnClickListener(new View.OnClickListener() {
@@ -135,6 +125,10 @@ public class RadioFragment extends Fragment implements View.OnClickListener {
                     textViewAnswer.setVisibility(View.VISIBLE);
                     buttonAnswer.setImageResource(R.drawable.incorrect);
                     buttonAnswer.setVisibility(View.VISIBLE);
+                    textViewRadioAnswer1.setClickable(false);
+                    textViewRadioAnswer2.setClickable(false);
+                    textViewRadioAnswer3.setClickable(false);
+                    textViewRadioAnswer4.setClickable(false);
                 }
             }
         });
@@ -213,9 +207,11 @@ public class RadioFragment extends Fragment implements View.OnClickListener {
                     .setNegativeButton("Շարունակել", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Intent i = new Intent(getContext(), ListActivity.class);
-                            startActivity(i);
-                            getActivity().finish();
+//                            Intent i = new Intent(getContext(), ListActivity.class);
+//                            startActivity(i);
+//                            getActivity().finish();
+                            LessonFragment lessonFragment = LessonFragment.newInstance(ListActivity.nextLesson);
+                            getFragmentManager().beginTransaction().replace(R.id.list_frame, lessonFragment).commit();
 
                         }
                     });

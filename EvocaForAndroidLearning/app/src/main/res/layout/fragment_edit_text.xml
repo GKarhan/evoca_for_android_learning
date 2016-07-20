@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:paddingBottom="15dp"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1.3">
 
     </LinearLayout>
 
@@ -25,9 +25,10 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="1.5">
 
             <TextView
+                android:id="@+id/tv_title"
                 android:gravity="center|bottom"
                 android:text="Exercise1"
                 android:textSize="20sp"
@@ -47,18 +48,14 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
             <TextView
                 android:id="@+id/tv_edit_question"
                 android:text="Loren ipsum is _____ dummy text of the printing and typesetting indusstry"
                 android:textSize="16sp"
-                android:gravity="bottom|center_horizontal"
+                android:gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="2"
                 android:paddingBottom="10dp"/>
 
             <View
@@ -67,31 +64,55 @@
                 android:background="#8b367400"
                 />
 
-        </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
             android:gravity="center_vertical"
             android:orientation="vertical">
-            <TextView
-                android:id="@+id/tv_edit_answer"
+
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="0dp"
+                android:layout_weight="0.5"/>
+
             <EditText
-                android:hint="answer"
+                android:paddingLeft="8dp"
+                android:background="@drawable/login_username"
+                android:hint="Ձեր պատասխանը"
                 android:id="@+id/et_text"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content" />
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.5"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5"/>
 
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.5">
+                <TextView
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    android:gravity="center"
+                    android:id="@+id/tv_answer"
+                    android:layout_weight="2.5"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
 
-            <!--<EditText-->
-                <!--android:id="@+id/et_edit_answer"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:hint="Your answer"-->
-                <!--android:editable="true"/>-->
+                <ImageButton
+                    android:background="@null"
+                    android:visibility="gone"
+                    android:id="@+id/btn_answer"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
 

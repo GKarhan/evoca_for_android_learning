@@ -49,7 +49,9 @@ public class ListActivity extends AppCompatActivity implements  ExpandableListVi
 
     ////////////////// by Tatev
     public static Child lesson;
+    public static Child nextLesson;
     public static int exerciseIndex;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -109,7 +111,20 @@ public class ListActivity extends AppCompatActivity implements  ExpandableListVi
         });
 
         expandableListView.removeAllViewsInLayout();
+
         Child childText =  expandableListAdapter.getChild(groupPosition, childPosition);
+
+        try{
+            if(expandableListAdapter.getChild(groupPosition, childPosition + 1) != null) {
+                nextLesson = expandableListAdapter.getChild(groupPosition, childPosition + 1);
+            } else if(expandableListAdapter.getChild(groupPosition + 1, 0) != null) {
+                nextLesson = expandableListAdapter.getChild(groupPosition + 1, 0);
+            } else {
+                nextLesson = null;
+            }
+        } catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
+        }
 
         LessonFragment lessonFragment = LessonFragment.newInstance(childText);
 

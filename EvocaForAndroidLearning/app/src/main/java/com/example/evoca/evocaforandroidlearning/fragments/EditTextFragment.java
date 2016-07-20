@@ -3,6 +3,8 @@ package com.example.evoca.evocaforandroidlearning.fragments;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,11 +32,14 @@ public class EditTextFragment extends Fragment implements View.OnClickListener {
     TextView textViewQuestion;
     //TextView textViewAnswer;
     //TextView textViewEditAnswer;
-    EditText etAnswer;
+//    EditText etAnswer;
     private Button checkButton;
     private boolean correctAnswer = false;
     private static Exercise exercise;
     private EditText ed;
+    private ImageButton buttonAnswer;
+    private TextView textViewAnswer;
+    private TextView textViewTitle;
 
     public EditTextFragment() {
         // Required empty public constructor
@@ -60,23 +66,53 @@ public class EditTextFragment extends Fragment implements View.OnClickListener {
         View rootView = inflater.inflate(R.layout.fragment_edit_text, container, false);
         textViewQuestion = (TextView) rootView.findViewById(R.id.tv_edit_question);
         ed = (EditText) rootView.findViewById(R.id.et_text);
-        //etAnswer = (EditText) rootView.findViewById(R.id.et_edit_answer);
         checkButton = (Button) rootView.findViewById(R.id.btn_chack);
 
-        /*String question = getArguments().getString("question");
-        String answer = getArguments().getString("answer1");*/
+        buttonAnswer = (ImageButton) rootView.findViewById(R.id.btn_answer);
+        textViewAnswer = (TextView) rootView.findViewById(R.id.tv_answer);
+        textViewTitle = (TextView) rootView.findViewById(R.id.tv_title);
+
+        final String tar1 = exercise.getTa1();
 
         textViewQuestion.setText(exercise.getQuestion());
+        textViewTitle.setText(ListActivity.lesson.getTitle());
 
-        checkButton.setOnClickListener(new View.OnClickListener() {
+        buttonAnswer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (correctAnswer) {
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                if (ed.getText().toString().equals(tar1)) {
                     Toast.makeText(getContext(), "Հալալ ա Քեզ", Toast.LENGTH_SHORT).show();
                     getNextExercise();
                 } else {
                     Toast.makeText(getContext(), "Սխալ պատասխան, փորձիր կրկին պատասխանել:", Toast.LENGTH_SHORT).show();
-                    getNextExercise();
+                    LessonFragment lessonFragment = LessonFragment.newInstance(ListActivity.lesson);
+                    transaction.replace(R.id.list_frame, lessonFragment).commit();
+
+                }
+            }
+        });
+
+        checkButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (ed.getText().toString().equals(tar1)) {
+                    textViewAnswer.setText(getResources().getString(R.string.correct_answer));
+                    textViewAnswer.setVisibility(View.VISIBLE);
+                    buttonAnswer.setImageResource(R.drawable.correct);
+                    buttonAnswer.setVisibility(View.VISIBLE);
+                    ed.setTextColor(Color.parseColor("#367400"));
+                    ed.setEnabled(false);
+                } else if (ed.getText().toString().isEmpty()){
+                    ed.setError("Դաշտը լրացված չէ");
+                }else {
+                    textViewAnswer.setText(getResources().getString(R.string.incorrect_answer));
+                    textViewAnswer.setVisibility(View.VISIBLE);
+                    buttonAnswer.setImageResource(R.drawable.incorrect);
+                    buttonAnswer.setVisibility(View.VISIBLE);
+                    ed.setTextColor(Color.parseColor("#D80027"));
+                    ed.setEnabled(false);
                 }
             }
         });
@@ -106,9 +142,9 @@ public class EditTextFragment extends Fragment implements View.OnClickListener {
                 }
             }
         } else {
-            //((ListActivity)getActivity()).onBackPressed();
+
             ListActivity.exerciseIndex = 0;
-            //transaction.replace(R.id.list_frame, LessonFragment.newInstance(ListActivity.lesson)).commit();
+
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
             builder.setTitle("   ").setMessage("Դուք հաջողությամբ ավարտեցիք ․․․․․․․․․․․․․․")
                     .setIcon(R.drawable.congratulations)
@@ -116,9 +152,8 @@ public class EditTextFragment extends Fragment implements View.OnClickListener {
                     .setNegativeButton("Շարունակել", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Intent i = new Intent(getContext(), ListActivity.class);
-                            startActivity(i);
-                            getActivity().finish();
+                            LessonFragment lessonFragment = LessonFragment.newInstance(ListActivity.nextLesson);
+                            getFragmentManager().beginTransaction().replace(R.id.list_frame, lessonFragment).commit();
                         }
                     });
 
