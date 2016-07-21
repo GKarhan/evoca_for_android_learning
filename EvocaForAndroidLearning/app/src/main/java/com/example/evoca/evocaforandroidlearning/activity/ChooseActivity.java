@@ -2,14 +2,12 @@ package com.example.evoca.evocaforandroidlearning.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.AudioManager;
-import android.media.SoundPool;
+import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -17,14 +15,13 @@ import android.widget.ProgressBar;
 import com.example.evoca.evocaforandroidlearning.R;
 import com.example.evoca.evocaforandroidlearning.util.PrefUtil;
 
-import java.io.IOException;
-
 public class ChooseActivity extends AppCompatActivity {
 
 
     private Button buttonChooseLessons;
     private Button buttonChooseExercise;
     private ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +58,14 @@ public class ChooseActivity extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
     }
     void listener(){
+
+        buttonChooseLessons.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ChooseActivity.this,ListActivity.class);
+                startActivity(i);
+            }
+        });
 
         buttonChooseExercise.setOnClickListener(new View.OnClickListener() {
             @Override

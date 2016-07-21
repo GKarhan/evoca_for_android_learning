@@ -1,8 +1,11 @@
 package com.example.evoca.evocaforandroidlearning.fragments;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
@@ -22,6 +25,7 @@ import com.example.evoca.evocaforandroidlearning.Model.Exercise;
 import com.example.evoca.evocaforandroidlearning.R;
 import com.example.evoca.evocaforandroidlearning.activity.ChooseActivity;
 import com.example.evoca.evocaforandroidlearning.activity.ListActivity;
+import com.example.evoca.evocaforandroidlearning.dialogs.Custom;
 import com.example.evoca.evocaforandroidlearning.util.PrefUtil;
 import com.facebook.AccessToken;
 import com.facebook.login.LoginManager;
@@ -80,6 +84,12 @@ public class CheckBoxFragment extends Fragment {
         checkBoxAnswer3 = (CheckBox) rootView.findViewById(R.id.cb_check_box_answer3);
         checkBoxAnswer4 = (CheckBox) rootView.findViewById(R.id.cb_check_box_answer4);
 
+
+       RadioFragment.mediaPlayerWrong = MediaPlayer.create(getContext(),R.raw.wrong);
+       RadioFragment.mediaPlayerRight = MediaPlayer.create(getContext(),R.raw.correct);
+
+        final Vibrator vibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+
         buttonAnswer = (ImageButton) rootView.findViewById(R.id.btn_answer);
         textViewAnswer = (TextView) rootView.findViewById(R.id.tv_answer);
         textViewTitle = (TextView) rootView.findViewById(R.id.tv_title);
@@ -128,12 +138,15 @@ public class CheckBoxFragment extends Fragment {
                 checkAnswer();
 
                 if (correctAnswer){
+                    RadioFragment.mediaPlayerRight.start();
                     textViewAnswer.setText(getResources().getString(R.string.correct_answer));
                     textViewAnswer.setVisibility(View.VISIBLE);
                     buttonAnswer.setImageResource(R.drawable.correct);
                     buttonAnswer.setVisibility(View.VISIBLE);
                     System.out.println(correctAnswer);
                 } else {
+                    vibrator.vibrate(1000);
+                    RadioFragment.mediaPlayerWrong.start();
                     textViewAnswer.setText(getResources().getString(R.string.incorrect_answer));
                     textViewAnswer.setVisibility(View.VISIBLE);
                     buttonAnswer.setImageResource(R.drawable.incorrect);
@@ -208,20 +221,25 @@ public class CheckBoxFragment extends Fragment {
             }
         } else {
             ListActivity.exerciseIndex = 0;
-            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setTitle("   ").setMessage("Դուք հաջողությամբ ավարտեցիք ․․․․․․․․․․․․․․")
-                    .setIcon(R.drawable.congratulations)
-                    .setCancelable(false)
-                    .setNegativeButton("Շարունակել", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            LessonFragment lessonFragment = LessonFragment.newInstance(ListActivity.nextLesson);
-                            getFragmentManager().beginTransaction().replace(R.id.list_frame, lessonFragment).commit();
-                        }
-                    });
-
-            AlertDialog alert = builder.create();
-            alert.show();
+//            final MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.queen);
+//            mp.start();
+//            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+//                builder.setTitle("   ").setMessage("Դուք հաջողությամբ ավարտեցիք ․․․․․․․․․․․․․․")
+//                    .setIcon(R.drawable.congratulations)
+//                    .setCancelable(false)
+//                    .setNegativeButton("Շարունակել", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            LessonFragment lessonFragment = LessonFragment.newInstance(ListActivity.nextLesson);
+//                            getFragmentManager().beginTransaction().replace(R.id.list_frame, lessonFragment).commit();
+//                        }
+//                    });
+//
+//            AlertDialog alert = builder.create();
+//            alert.show();
+            Custom custom = new Custom();
+            custom.setCancelable(false);
+            custom.show(getFragmentManager(), null);
         }
     }
 }

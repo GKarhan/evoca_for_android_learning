@@ -1,12 +1,10 @@
 package com.example.evoca.evocaforandroidlearning.fragments;
 
+import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Typeface;
+import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.renderscript.Type;
+import android.os.Vibrator;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
@@ -14,10 +12,8 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,8 +22,8 @@ import com.example.evoca.evocaforandroidlearning.Model.Child;
 import com.example.evoca.evocaforandroidlearning.Model.Exercise;
 import com.example.evoca.evocaforandroidlearning.R;
 import com.example.evoca.evocaforandroidlearning.activity.ListActivity;
-
-import java.util.ArrayList;
+import com.example.evoca.evocaforandroidlearning.dialogs.Custom;
+import com.example.evoca.evocaforandroidlearning.dialogs.CustomDialog;
 
 
 public class RadioFragment extends Fragment implements View.OnClickListener {
@@ -44,6 +40,9 @@ public class RadioFragment extends Fragment implements View.OnClickListener {
     private Button checkButton;
     private static Exercise exercise;
     private TextView textViewTitle;
+    public static MediaPlayer mediaPlayerWrong;
+    public static MediaPlayer mediaPlayerRight;
+
 
 
     public RadioFragment() {
@@ -76,10 +75,14 @@ public class RadioFragment extends Fragment implements View.OnClickListener {
         textViewRadioAnswer3 = (RadioButton) rootView.findViewById(R.id.tv_radio_answer3);
         textViewRadioAnswer4 = (RadioButton) rootView.findViewById(R.id.tv_radio_answer4);
         textViewTitle = (TextView) rootView.findViewById(R.id.tv_title);
+        final Vibrator vibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
 
         buttonAnswer = (ImageButton) rootView.findViewById(R.id.btn_answer);
         textViewAnswer = (TextView) rootView.findViewById(R.id.tv_answer);
         checkButton = (Button) rootView.findViewById(R.id.btn_radio_check);
+
+        mediaPlayerWrong = MediaPlayer.create(getContext(),R.raw.wrong);
+        mediaPlayerRight = MediaPlayer.create(getContext(),R.raw.correct);
 
 
         textViewTitle.setText(ListActivity.lesson.getTitle());
@@ -116,15 +119,19 @@ public class RadioFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onClick(View v) {
                 if (correctAnswer){
+                    mediaPlayerRight.start();
                     textViewAnswer.setText(getResources().getString(R.string.correct_answer));
                     textViewAnswer.setVisibility(View.VISIBLE);
                     buttonAnswer.setImageResource(R.drawable.correct);
                     buttonAnswer.setVisibility(View.VISIBLE);
+
                 }else {
+                    mediaPlayerWrong.start();
                     textViewAnswer.setText(getResources().getString(R.string.incorrect_answer));
                     textViewAnswer.setVisibility(View.VISIBLE);
                     buttonAnswer.setImageResource(R.drawable.incorrect);
                     buttonAnswer.setVisibility(View.VISIBLE);
+                    vibrator.vibrate(1000);
                     textViewRadioAnswer1.setClickable(false);
                     textViewRadioAnswer2.setClickable(false);
                     textViewRadioAnswer3.setClickable(false);
@@ -200,24 +207,30 @@ public class RadioFragment extends Fragment implements View.OnClickListener {
             //((ListActivity)getActivity()).onBackPressed();
             ListActivity.exerciseIndex = 0;
            // transaction.replace(R.id.list_frame, LessonFragment.newInstance(ListActivity.lesson)).commit();
-            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-            builder.setTitle("   ").setMessage("Դուք հաջողությամբ ավարտեցիք ․․․․․․․․․․․․․․")
-                    .setIcon(R.drawable.congratulations)
-                    .setCancelable(false)
-                    .setNegativeButton("Շարունակել", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-//                            Intent i = new Intent(getContext(), ListActivity.class);
-//                            startActivity(i);
-//                            getActivity().finish();
-                            LessonFragment lessonFragment = LessonFragment.newInstance(ListActivity.nextLesson);
-                            getFragmentManager().beginTransaction().replace(R.id.list_frame, lessonFragment).commit();
-
-                        }
-                    });
-
-            AlertDialog alert = builder.create();
-            alert.show();
+//            final MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.queen);
+//            mp.start();
+//            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+//            builder.setTitle("   ").setMessage("Դուք հաջողությամբ ավարտեցիք ․․․․․․․․․․․․․․")
+//                    .setIcon(R.drawable.congratulations)
+//                    .setCancelable(false)
+//                    .setNegativeButton("Շարունակել", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+////                            Intent i = new Intent(getContext(), ListActivity.class);
+////                            startActivity(i);
+////                            getActivity().finish();
+//                            mp.pause();
+//                            LessonFragment lessonFragment = LessonFragment.newInstance(ListActivity.nextLesson);
+//                            getFragmentManager().beginTransaction().replace(R.id.list_frame, lessonFragment).commit();
+//
+//                        }
+//                    });
+//
+//            AlertDialog alert = builder.create();
+//            alert.show();
+            Custom custom = new Custom();
+            custom.setCancelable(false);
+            custom.show(getFragmentManager(), null);
 
         }
 

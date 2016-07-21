@@ -5,8 +5,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
@@ -25,6 +27,8 @@ import com.example.evoca.evocaforandroidlearning.Model.Child;
 import com.example.evoca.evocaforandroidlearning.Model.Exercise;
 import com.example.evoca.evocaforandroidlearning.R;
 import com.example.evoca.evocaforandroidlearning.activity.ListActivity;
+import com.example.evoca.evocaforandroidlearning.dialogs.Custom;
+import com.example.evoca.evocaforandroidlearning.dialogs.CustomDialog;
 
 
 public class EditTextFragment extends Fragment implements View.OnClickListener {
@@ -40,6 +44,7 @@ public class EditTextFragment extends Fragment implements View.OnClickListener {
     private ImageButton buttonAnswer;
     private TextView textViewAnswer;
     private TextView textViewTitle;
+
 
     public EditTextFragment() {
         // Required empty public constructor
@@ -71,7 +76,9 @@ public class EditTextFragment extends Fragment implements View.OnClickListener {
         buttonAnswer = (ImageButton) rootView.findViewById(R.id.btn_answer);
         textViewAnswer = (TextView) rootView.findViewById(R.id.tv_answer);
         textViewTitle = (TextView) rootView.findViewById(R.id.tv_title);
-
+        RadioFragment.mediaPlayerRight = MediaPlayer.create(getContext(),R.raw.correct);
+        RadioFragment.mediaPlayerWrong = MediaPlayer.create(getContext(),R.raw.wrong);
+        final Vibrator vibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
         final String tar1 = exercise.getTa1();
 
         textViewQuestion.setText(exercise.getQuestion());
@@ -98,6 +105,7 @@ public class EditTextFragment extends Fragment implements View.OnClickListener {
             public void onClick(View v) {
 
                 if (ed.getText().toString().equals(tar1)) {
+                    RadioFragment.mediaPlayerRight.start();
                     textViewAnswer.setText(getResources().getString(R.string.correct_answer));
                     textViewAnswer.setVisibility(View.VISIBLE);
                     buttonAnswer.setImageResource(R.drawable.correct);
@@ -105,8 +113,12 @@ public class EditTextFragment extends Fragment implements View.OnClickListener {
                     ed.setTextColor(Color.parseColor("#367400"));
                     ed.setEnabled(false);
                 } else if (ed.getText().toString().isEmpty()){
+                    vibrator.vibrate(1000);
+                    RadioFragment.mediaPlayerWrong.start();
                     ed.setError("Դաշտը լրացված չէ");
                 }else {
+                    vibrator.vibrate(1000);
+                    RadioFragment.mediaPlayerWrong.start();
                     textViewAnswer.setText(getResources().getString(R.string.incorrect_answer));
                     textViewAnswer.setVisibility(View.VISIBLE);
                     buttonAnswer.setImageResource(R.drawable.incorrect);
@@ -144,21 +156,25 @@ public class EditTextFragment extends Fragment implements View.OnClickListener {
         } else {
 
             ListActivity.exerciseIndex = 0;
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-            builder.setTitle("   ").setMessage("Դուք հաջողությամբ ավարտեցիք ․․․․․․․․․․․․․․")
-                    .setIcon(R.drawable.congratulations)
-                    .setCancelable(false)
-                    .setNegativeButton("Շարունակել", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            LessonFragment lessonFragment = LessonFragment.newInstance(ListActivity.nextLesson);
-                            getFragmentManager().beginTransaction().replace(R.id.list_frame, lessonFragment).commit();
-                        }
-                    });
-
-            AlertDialog alert = builder.create();
-            alert.show();
+//            final MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.queen);
+//            mp.start();
+//            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+//            builder.setTitle("   ").setMessage("Դուք հաջողությամբ ավարտեցիք ․․․․․․․․․․․․․․")
+//                    .setIcon(R.drawable.congratulations)
+//                    .setCancelable(false)
+//                    .setNegativeButton("Շարունակել", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            LessonFragment lessonFragment = LessonFragment.newInstance(ListActivity.nextLesson);
+//                            getFragmentManager().beginTransaction().replace(R.id.list_frame, lessonFragment).commit();
+//                        }
+//                    });
+//
+//            AlertDialog alert = builder.create();
+//            alert.show();
+            Custom custom = new Custom();
+            custom.setCancelable(false);
+            custom.show(getFragmentManager(), null);
         }
         }
 
