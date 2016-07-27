@@ -175,7 +175,7 @@ public class EditTextFragment extends Fragment implements View.OnClickListener {
             Custom custom = new Custom();
             custom.setCancelable(false);
             custom.show(getFragmentManager(), null);
-        }
+           }
         }
 
 

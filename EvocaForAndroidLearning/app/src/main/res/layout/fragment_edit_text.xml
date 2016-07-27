@@ -48,6 +48,7 @@
 
         </LinearLayout>
 
+
             <TextView
                 android:id="@+id/tv_edit_question"
                 android:text="Loren ipsum is _____ dummy text of the printing and typesetting indusstry"
@@ -128,5 +129,4 @@
             android:layout_height="0dp" />
 
     </LinearLayout>
-
 </LinearLayout>
