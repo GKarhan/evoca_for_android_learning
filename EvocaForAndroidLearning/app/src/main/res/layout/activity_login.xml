@@ -73,6 +73,8 @@
                 android:layout_height="0dp" />
 
             <EditText
+                android:inputType="text"
+                android:imeOptions="actionNext"
                 android:paddingLeft="5dp"
                 android:id="@+id/et_login_email"
                 android:background="@drawable/login_username"
@@ -90,6 +92,8 @@
                 android:layout_height="0dp" />
 
             <EditText
+
+                android:imeOptions="actionDone"
                 android:paddingLeft="5dp"
                 android:id="@+id/et_login_password"
                 android:inputType="textPassword"

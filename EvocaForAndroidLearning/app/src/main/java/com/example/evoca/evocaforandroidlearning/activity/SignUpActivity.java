@@ -3,13 +3,19 @@ package com.example.evoca.evocaforandroidlearning.activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
+
 import com.example.evoca.evocaforandroidlearning.Model.ServerResponse;
 import com.example.evoca.evocaforandroidlearning.R;
 import com.example.evoca.evocaforandroidlearning.api.ApiManager;
 import com.example.evoca.evocaforandroidlearning.dialogs.CustomDialog;
+import com.example.evoca.evocaforandroidlearning.dialogs.ViewSignUpDialog;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import retrofit.Callback;
@@ -33,6 +39,7 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
         findView();
         listener();
+        scrollValidation();
     }
     private void findView(){
         signUpButton = (Button) findViewById(R.id.btn_sign_up);
@@ -54,15 +61,17 @@ public class SignUpActivity extends AppCompatActivity {
                 String email = editTextSignUpEmail.getText().toString();
                 String password = editTextSignUpPass.getText().toString();
 
-
                 if (validation() && emailValidation() && confirmValidation()) {
                     ApiManager.getInstance().getClient().postRegistrationData(email, password, firstName, lastName, new Callback<ServerResponse>() {
                         @Override
                         public void success(ServerResponse serverResponse, Response response) {
                             progressBar.setVisibility(View.GONE);
                             if (serverResponse.getStatus()) {
-                                CustomDialog custom = new CustomDialog();
-                                custom.show(getSupportFragmentManager(), null);
+//                                CustomDialog custom = new CustomDialog();
+//                                custom.show(getSupportFragmentManager(), null);
+                                ViewSignUpDialog alert = new ViewSignUpDialog();
+                                alert.showDialog(SignUpActivity.this, "Դուք հաջողությամբ գրանցվել ");
+
 
                             } else {
                                 editTextSignUpEmail.setError(getResources().getString(R.string.already_exists));
@@ -79,6 +88,7 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
     private boolean validation() {
+
         if (editTextFistName.getText().toString().length() == 0) {
             setErrorOnField(editTextFistName, R.string.is_empty);
             return false;
@@ -97,6 +107,12 @@ public class SignUpActivity extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    private void scrollValidation(){
+        ScrollView scroll = new ScrollView(getBaseContext());
+        scroll.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT));
     }
 
     private boolean emailValidation() {

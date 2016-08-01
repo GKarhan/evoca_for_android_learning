@@ -99,6 +99,27 @@ public class RadioFragment extends Fragment implements View.OnClickListener {
         textViewRadioAnswer3.setOnClickListener(this);
         textViewRadioAnswer4.setOnClickListener(this);
 
+    /*    if (textViewRadioAnswer1.isChecked()) {
+            textViewRadioAnswer2.setChecked(false);
+            textViewRadioAnswer3.setChecked(false);
+            textViewRadioAnswer4.setChecked(false);
+        }
+        if (textViewRadioAnswer2.isChecked()) {
+            textViewRadioAnswer1.setChecked(false);
+            textViewRadioAnswer3.setChecked(false);
+            textViewRadioAnswer4.setChecked(false);
+        }
+        if (textViewRadioAnswer3.isChecked()) {
+            textViewRadioAnswer1.setChecked(false);
+            textViewRadioAnswer2.setChecked(false);
+            textViewRadioAnswer4.setChecked(false);
+        }
+        if (textViewRadioAnswer4.isChecked()) {
+            textViewRadioAnswer1.setChecked(false);
+            textViewRadioAnswer2.setChecked(false);
+            textViewRadioAnswer3.setChecked(false);
+        }*/
+
       buttonAnswer.setOnClickListener(new View.OnClickListener() {
                   @Override
                   public void onClick(View v) {
@@ -150,6 +171,9 @@ public class RadioFragment extends Fragment implements View.OnClickListener {
 
         switch(v.getId()) {
             case R.id.tv_radio_answer1:
+                textViewRadioAnswer2.setChecked(false);
+                textViewRadioAnswer3.setChecked(false);
+                textViewRadioAnswer4.setChecked(false);
                 //System.out.println(list.size());
                 if (checked && textViewRadioAnswer1.getText().equals(tarberak1)){
                     correctAnswer = true;
@@ -158,6 +182,9 @@ public class RadioFragment extends Fragment implements View.OnClickListener {
                 }
                     break;
             case R.id.tv_radio_answer2:
+                textViewRadioAnswer1.setChecked(false);
+                textViewRadioAnswer3.setChecked(false);
+                textViewRadioAnswer4.setChecked(false);
                 if (checked && textViewRadioAnswer2.getText().equals(tarberak1)){
                     correctAnswer = true;
                 } else {
@@ -165,6 +192,9 @@ public class RadioFragment extends Fragment implements View.OnClickListener {
                 }
                     break;
             case R.id.tv_radio_answer3:
+                textViewRadioAnswer2.setChecked(false);
+                textViewRadioAnswer1.setChecked(false);
+                textViewRadioAnswer4.setChecked(false);
                 if (checked && textViewRadioAnswer3.getText().equals(tarberak1)){
                     correctAnswer = true;
                 } else {
@@ -172,6 +202,9 @@ public class RadioFragment extends Fragment implements View.OnClickListener {
                 }
                     break;
             case R.id.tv_radio_answer4:
+                textViewRadioAnswer2.setChecked(false);
+                textViewRadioAnswer3.setChecked(false);
+                textViewRadioAnswer1.setChecked(false);
                 if (checked && textViewRadioAnswer4.getText().equals(tarberak1)){
                     correctAnswer = true;
                 } else {
